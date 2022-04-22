@@ -11,7 +11,10 @@ public class Item
     // Constructor
     public Item(String name, double price, int quantity, int aisleNum)
     {
-
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.aisleNum = aisleNum;
     }
 
     // Methods
@@ -33,5 +36,9 @@ public class Item
     public int getAisle()
     {
         return aisleNum;
+    }
+
+    public void setAisle(int aisleNum){
+        this.aisleNum = aisleNum;
     }
 }

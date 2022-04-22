@@ -29,7 +29,6 @@ public class FileUtils {
 
     public void writeInventoryToFile(List<Item> items) {
         // TODO
-
     }
 
     public void writeStaffToFile(List<Staff> employees) {

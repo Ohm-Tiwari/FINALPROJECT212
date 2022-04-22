@@ -8,8 +8,11 @@ public class Staff
     private String role;
 
     // Constructor
-    public Staff(String name, int age, String role)
+    public Staff(String fullName, int age, String role)
     {
+        this.fullName = fullName;
+        this.age = age;
+        this.role = role;
 
     }
 
@@ -28,4 +31,9 @@ public class Staff
     {
         return role;
     }
+
+    public void setRole(String role){
+        this.role = role;
+    }
+
 }
