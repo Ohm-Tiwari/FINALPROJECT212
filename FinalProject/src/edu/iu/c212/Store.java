@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class Store implements IStore
 {
     static String name;
-    static String price;
-    static String quantity;
-    static String aisleNum;
+    static double price;
+    static int quantity;
+    static int aisleNum;
 
 
     // Constructor
@@ -48,13 +48,13 @@ public class Store implements IStore
                 name = in.next();
                 index++;
             } else if (index == 1) {
-                price = in.next();
+                price = Double.parseDouble(in.next());
                 index++;
             } else if (index == 2) {
-                quantity = in.next();
+                quantity = Integer.parseInt(in.next());
                 index++;
             } else if (index == 3) {
-                aisleNum = in.next();
+                aisleNum = Integer.parseInt(in.next());
                 inList.add(new Item(name, price, quantity, aisleNum));
                 index = 0;
             }
