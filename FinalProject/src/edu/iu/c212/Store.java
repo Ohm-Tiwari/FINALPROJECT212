@@ -72,7 +72,6 @@ public class Store implements IStore
 
             return inList;
         }
-    }
 
     @Override
     public List<Staff> getStaffFromFile(){
