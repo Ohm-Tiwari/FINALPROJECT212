@@ -67,7 +67,7 @@ public class Store implements IStore
         }
         catch(FileNotFoundException e)
         {
-           System.exit(0);
+            System.exit(0);
         }
     }
 
@@ -75,60 +75,60 @@ public class Store implements IStore
     @Override
     public List<Item> getItemsFromFile(File inputFile) throws FileNotFoundException
     {
-            List<Item> inList = new ArrayList<>();
-            Scanner in = new Scanner(inputFile);
-            in.nextLine();
-            in.useDelimiter(",|\\n");
-            int index = 0;
+        List<Item> inList = new ArrayList<>();
+        Scanner in = new Scanner(inputFile);
+        in.nextLine();
+        in.useDelimiter(",|\\n");
+        int index = 0;
 
-            while(in.hasNext()){
-                if (index == 0) {
-                    name = in.next();
-                    index++;
-                } else if (index == 1) {
-                    price = Double.parseDouble(in.next());
-                    index++;
-                } else if (index == 2) {
-                    quantity = Integer.parseInt(in.next());
-                    index++;
-                } else if (index == 3) {
-                    aisleNum = Integer.parseInt(in.next());
-                    inList.add(new Item(name, price, quantity, aisleNum));
-                    index = 0;
-                }
+        while(in.hasNext()){
+            if (index == 0) {
+                name = in.next();
+                index++;
+            } else if (index == 1) {
+                price = Double.parseDouble(in.next());
+                index++;
+            } else if (index == 2) {
+                quantity = Integer.parseInt(in.next());
+                index++;
+            } else if (index == 3) {
+                aisleNum = Integer.parseInt(in.next());
+                inList.add(new Item(name, price, quantity, aisleNum));
+                index = 0;
             }
-
-            return inList;
         }
+
+        return inList;
+    }
 
     @Override
     public List<Staff> getStaffFromFile(File inputFile) throws FileNotFoundException
     {
-            List<Staff> inList = new ArrayList<>();
-            Scanner in = new Scanner(inputFile);
+        List<Staff> inList = new ArrayList<>();
+        Scanner in = new Scanner(inputFile);
 
-            int index = 0;
-            while(in.hasNext()){
-                if (index == 0) {
-                    fName = in.next();
-                    index++;
-                } else if (index == 1) {
-                    lName = in.next();
-                    index++;
-                } else if (index == 2) {
-                    age = Integer.parseInt(in.next());
-                    index++;
-                } else if (index == 3) {
-                    role = in.next();
-                    index++;
-                } else if (index == 4) {
-                    availability = in.next();
-                    inList.add(new Staff((fName + " " + lName), age, role, availability));
-                    index = 0;
-                }
+        int index = 0;
+        while(in.hasNext()){
+            if (index == 0) {
+                fName = in.next();
+                index++;
+            } else if (index == 1) {
+                lName = in.next();
+                index++;
+            } else if (index == 2) {
+                age = Integer.parseInt(in.next());
+                index++;
+            } else if (index == 3) {
+                role = in.next();
+                index++;
+            } else if (index == 4) {
+                availability = in.next();
+                inList.add(new Staff((fName + " " + lName), age, role, availability));
+                index = 0;
             }
-            return inList;
         }
+        return inList;
+    }
 
     @Override
     public void saveItemsFromFile(File inputFile) throws FileNotFoundException
