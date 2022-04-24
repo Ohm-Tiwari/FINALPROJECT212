@@ -172,7 +172,7 @@ public class Store implements IStore
 
     // Add an item inventory.txt, record that in the output file
     // Whatever parses is meant to know those variables separately messed up
-    public static void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle) throws IOException
+    public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle) throws IOException
     {
         try
         {
@@ -202,7 +202,7 @@ public class Store implements IStore
 
     // Command parser derives name and then calls COST after stripping '' from 'itemname'
     // - Josh
-    public static void COST(String itemName) throws IOException
+    public void COST(String itemName) throws IOException
     {
         try
         {
@@ -232,7 +232,7 @@ public class Store implements IStore
     }
 
     // Meant to parse
-    public static void EXIT() throws FileNotFoundException, IOException
+    public void EXIT() throws FileNotFoundException, IOException
     {
         try
         {
@@ -255,9 +255,13 @@ public class Store implements IStore
         }
 
     }
+    public void FIND(String itemName)
+    {
+
+    }
 
     // Fire command
-    public static void FIRE(String name)
+    public void FIRE(String name)
     {
         try
         {
@@ -284,6 +288,31 @@ public class Store implements IStore
             System.out.println("File could not be found!");
             System.exit(0);
         }
+    }
+
+    public void HIRE(String staffName, int staffAge, String staffRole, String Availability)
+    {
+
+    }
+
+    public void SAW()
+    {
+
+    }
+
+    public void SCHEDULE()
+    {
+
+    }
+
+    public void SELL()
+    {
+
+    }
+
+    public void QUANTITY()
+    {
+
     }
 }
 
