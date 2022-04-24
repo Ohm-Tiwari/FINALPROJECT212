@@ -29,6 +29,7 @@ public class Store implements IStore
     // Files
     static File inventoryFile;
     static File staffFile;
+    static File inputFile;
 
     // Constructor
     public Store() throws FileNotFoundException
@@ -38,6 +39,7 @@ public class Store implements IStore
             // Fill files
             inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
             staffFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
+            inputFile = new File("src/edu/iu/c212/resources/input.txt");
 
             // Trigger take action
             takeAction();
@@ -163,7 +165,7 @@ public class Store implements IStore
 
     public static void EXIT()
     {
-
+        System.out.println("Press enter to continue...");
     }
-    
+
 }

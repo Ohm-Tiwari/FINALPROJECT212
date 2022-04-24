@@ -15,4 +15,6 @@ public interface IStore
     void saveItemsFromFile(File inputFile) throws FileNotFoundException;
     void saveStaffFromFile(File inputFile) throws  FileNotFoundException;
     void takeAction() throws FileNotFoundException;
+
+    //Store
 }
