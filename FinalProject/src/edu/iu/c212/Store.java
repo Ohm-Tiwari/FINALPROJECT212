@@ -3,10 +3,14 @@ package edu.iu.c212;
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.awt.event.KeyListener;
+
+import static edu.iu.c212.Store.exitCommandMenu;
 
 public class Store implements IStore
 {
@@ -33,21 +37,28 @@ public class Store implements IStore
     static File staffAvailabilityFile;
     static File storeScheduleOutputFile;
 
-    //Command bools
-    static boolean exitCommandMenu; 
+    //Command booleans
+    protected static boolean exitCommandMenu;
 
     // Constructor
     public Store() throws FileNotFoundException
     {
-        try
-        {
+        try {
             // Fill files
             inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
             staffAvailabilityFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
+            outputFile = new File("src/edu/iu/c212/resources/output.txt");
+            staffSchedulesInputFile = new File("src/edu/iu/c212/resources/shift_schedules_IN.txt");
+            storeScheduleOutputFile = new File("src/edu/iu/c212/resources/store_schedule_OUT.txt");
             inputFile = new File("src/edu/iu/c212/resources/input.txt");
 
             // Trigger take action
             takeAction();
+
+            // Initialize Keyboard
+            Keyboard keyboard = new Keyboard();
+            exitCommandMenu = false;
+
         }
         catch (FileNotFoundException e)
         {
@@ -157,32 +168,82 @@ public class Store implements IStore
         }
     }
 
-    // Helper function
-    public static void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
+    // Command functions for Input File Command Parsing
+
+    // Add an item inventory.txt, record that in the output file
+    // Whatever parses is meant to know those variables separately messed up
+    public static void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle) throws IOException
     {
+        try
+        {
+            // Write to Inventory
+            FileWriter inventory = new FileWriter(inventoryFile, true);
+            PrintWriter inventoryIn = new PrintWriter(inventory, true);
+
+            // Add the line to inventory
+            inventoryIn.println("'" + itemName + "'" + "," + itemCost + "," + itemQuantity + "," + itemAisle);
+
+            inventoryIn.close();
+
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
+
+            out.println(itemName + " was added to inventory.");
+
+            out.close();
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
 
     }
 
-    public static void COST(String itemName)
+    // Command parser derives name and then calls COST after stripping '' from 'itemname'
+    // - Josh
+    public static void COST(String itemName) throws IOException
     {
+        try
+        {
+            double itemCost = 0.0;
+            //Find the cost
+            for (Item item: itemList)
+            {
+                if(item.getName().equals(itemName))
+                {
+                    itemCost = item.getPrice();
+                }
+            }
+
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
+
+            out.println(itemName +": $" + itemCost);
+
+            out.close();
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
 
     }
 
+    // Meant to parse
     public static void EXIT() throws FileNotFoundException, IOException
     {
         try
         {
             System.out.println("Press enter to continue...");
-            Scanner in = new Scanner(inputFile);
+            exitCommandMenu = true;
 
-            FileWriter output = new FileWriter(inputFile, true);
+            FileWriter output = new FileWriter(outputFile, true);
             PrintWriter out = new PrintWriter(output, true);
             out.println("Thank you for visiting High's Hardware and Gardening!");
 
-            while(!)
-            {
-
-            }
+            out.close();
         }
         catch(FileNotFoundException e1)
         {
@@ -195,4 +256,30 @@ public class Store implements IStore
 
     }
 
+}
+
+class Keyboard implements KeyListener
+{
+    @Override
+    public void keyTyped(KeyEvent event)
+    {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event)
+    {
+        //Input key for Exit command
+        if(event.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(exitCommandMenu)
+            {
+                System.exit(0);
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event)
+    {
+    }
 }
