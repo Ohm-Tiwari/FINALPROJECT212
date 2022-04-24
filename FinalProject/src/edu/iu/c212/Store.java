@@ -26,28 +26,49 @@ public class Store implements IStore
     static String role;
     static String availability;
 
+    // Files
+    static File inventoryFile;
+    static File staffFile;
 
     // Constructor
-    public Store()
+    public Store() throws FileNotFoundException
     {
-        // Required call
-        takeAction();
+        try
+        {
+            // Fill files
+            inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
+            staffFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
 
-        // Develop this into running through the input file
+            // Trigger take action
+            takeAction();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.exit(0);
+        }
     }
 
     // Methods
     @Override
-    public void takeAction()
+    public void takeAction() throws FileNotFoundException
     {
-
+        try
+        {
+            // Create the lists
+            saveItemsFromFile(inventoryFile);
+            saveStaffFromFile(staffFile);
+        }
+        catch(FileNotFoundException e)
+        {
+           System.exit(0);
+        }
     }
 
 
     @Override
-    public List<Item> getItemsFromFile(){
+    public List<Item> getItemsFromFile(File inputFile) throws FileNotFoundException
+    {
             List<Item> inList = new ArrayList<>();
-            File inputFile = new File("src/edu/iu/c212/resources/inventory.txt");
             Scanner in = new Scanner(inputFile);
             in.nextLine();
             in.useDelimiter(",|\\n");
@@ -74,11 +95,10 @@ public class Store implements IStore
         }
 
     @Override
-    public List<Staff> getStaffFromFile(){
+    public List<Staff> getStaffFromFile(File inputFile) throws FileNotFoundException
+    {
             List<Staff> inList = new ArrayList<>();
-            File inputFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
             Scanner in = new Scanner(inputFile);
-
 
             int index = 0;
             while(in.hasNext()){
@@ -104,13 +124,46 @@ public class Store implements IStore
         }
 
     @Override
-    public void saveItemsFromFile() {
-        itemList = getItemsFromFile();
+    public void saveItemsFromFile(File inputFile) throws FileNotFoundException
+    {
+        try
+        {
+            itemList = getItemsFromFile(inputFile);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.exit(0);
+        }
+
     }
 
     @Override
-    public void saveStaffFromFile() {
-        staffList = getStaffFromFile();
+    public void saveStaffFromFile(File inputFile) throws FileNotFoundException
+    {
+        try
+        {
+            staffList = getStaffFromFile(inputFile);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.exit(0);
+        }
+    }
+
+    // Helper function
+    public static void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
+    {
 
     }
+
+    public static void COST(String itemName)
+    {
+
+    }
+
+    public static void EXIT()
+    {
+
+    }
+    
 }
