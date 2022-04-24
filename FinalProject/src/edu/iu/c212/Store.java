@@ -3,8 +3,7 @@ package edu.iu.c212;
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,8 +27,14 @@ public class Store implements IStore
 
     // Files
     static File inventoryFile;
-    static File staffFile;
     static File inputFile;
+    static File outputFile;
+    static File staffSchedulesInputFile;
+    static File staffAvailabilityFile;
+    static File storeScheduleOutputFile;
+
+    //Command bools
+    static boolean exitCommandMenu; 
 
     // Constructor
     public Store() throws FileNotFoundException
@@ -38,7 +43,7 @@ public class Store implements IStore
         {
             // Fill files
             inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
-            staffFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
+            staffAvailabilityFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
             inputFile = new File("src/edu/iu/c212/resources/input.txt");
 
             // Trigger take action
@@ -58,7 +63,7 @@ public class Store implements IStore
         {
             // Create the lists
             saveItemsFromFile(inventoryFile);
-            saveStaffFromFile(staffFile);
+            saveStaffFromFile(staffAvailabilityFile);
         }
         catch(FileNotFoundException e)
         {
@@ -163,9 +168,31 @@ public class Store implements IStore
 
     }
 
-    public static void EXIT()
+    public static void EXIT() throws FileNotFoundException, IOException
     {
-        System.out.println("Press enter to continue...");
+        try
+        {
+            System.out.println("Press enter to continue...");
+            Scanner in = new Scanner(inputFile);
+
+            FileWriter output = new FileWriter(inputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
+            out.println("Thank you for visiting High's Hardware and Gardening!");
+
+            while(!)
+            {
+
+            }
+        }
+        catch(FileNotFoundException e1)
+        {
+            System.exit(0);
+        }
+        catch(IOException e2)
+        {
+            System.exit(0);
+        }
+
     }
 
 }
