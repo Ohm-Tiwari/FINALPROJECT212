@@ -45,15 +45,6 @@ public class StaffScheduler
         }
     };
 
-    public static void main(String[] args) {
-        testComparator();
-    }
-
-    public static String testins(){
-
-    }
-
-
     public void testComparator(){
 
         List<Staff> inList = staffList;
@@ -77,37 +68,4 @@ public class StaffScheduler
         }
         return count;
     }
-
-    public static void fire(String name){
-        try {
-
-            List<Staff> inList = staffList;
-
-            File inputFile = new File(staffSchedulerInputFile);
-            Scanner in = new Scanner(inputFile);
-            File newFile = new File("tempFile.txt");
-            BufferedReader input = new BufferedReader(new FileReader(inputFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile));
-            for (int i = 0; i < staffList.size(); i++) {
-                if(staffList.get(i).getName().equals(name)){
-
-                }
-                else{
-                    writer.write(staffList.get(i).getName() + " " + staffList.get(i).getAge() + " " +
-                            staffList.get(i).getRole() + " " + staffList.get(i).getAvailability() + System.getProperty("line.separator"));
-                }
-
-            }
-            boolean result = newFile.renameTo(inputFile);
-            input.close();
-            writer.close();
-        }
-        //newFile.renameTo(inputFile);
-        catch (IOException e) {
-            System.out.println("File could not be found!");
-        }
-    }
-
-
-
 }

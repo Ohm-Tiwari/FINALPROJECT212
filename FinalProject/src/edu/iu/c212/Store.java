@@ -33,7 +33,7 @@ public class Store implements IStore
     static File inventoryFile;
     static File inputFile;
     static File outputFile;
-    static File staffSchedulesInputFile;
+    static File staffScheduleInputFile;
     static File staffAvailabilityFile;
     static File storeScheduleOutputFile;
 
@@ -48,7 +48,7 @@ public class Store implements IStore
             inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
             staffAvailabilityFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
             outputFile = new File("src/edu/iu/c212/resources/output.txt");
-            staffSchedulesInputFile = new File("src/edu/iu/c212/resources/shift_schedules_IN.txt");
+            staffScheduleInputFile = new File("src/edu/iu/c212/resources/shift_schedules_IN.txt");
             storeScheduleOutputFile = new File("src/edu/iu/c212/resources/store_schedule_OUT.txt");
             inputFile = new File("src/edu/iu/c212/resources/input.txt");
 
@@ -256,6 +256,35 @@ public class Store implements IStore
 
     }
 
+    // Fire command
+    public static void FIRE(String name)
+    {
+        try
+        {
+            File newFile = new File("tempFile.txt");
+            BufferedReader input = new BufferedReader(new FileReader(staffScheduleInputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile));
+            for (int i = 0; i < staffList.size(); i++) {
+                if(staffList.get(i).getName().equals(name))
+                {
+                    // Supposed to be empty
+                }
+                else
+                {
+                    writer.write(staffList.get(i).getName() + " " + staffList.get(i).getAge() + " " + staffList.get(i).getRole() + " " + staffList.get(i).getAvailability() + System.getProperty("line.separator"));
+                }
+
+            }
+            boolean result = newFile.renameTo(inputFile);
+            input.close();
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("File could not be found!");
+            System.exit(0);
+        }
+    }
 }
 
 class Keyboard implements KeyListener
