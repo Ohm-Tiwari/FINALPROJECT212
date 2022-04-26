@@ -4,36 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SawPrimePlanks {
-    static int count = 0;
+
+    List<Integer> length = new ArrayList<>();
     // Methods
-    public ArrayList<Integer> getPlanksLengths(int longPlankLength) {
-        ArrayList<Integer> tempList = new ArrayList<Integer>();
-//        Integer tempInt = new Integer(10);
-//        tempList.add(tempInt);
+    public List<Integer> getPlanksLengths(int longPlankLength) {
+        length = new ArrayList<>();
+        sawPlank(longPlankLength);
+        return length;
+    }
 
         /**
          *  IF LPH CAN BE DIVIDED FROM A NUMBER IN PRIME NUM
          * ELSE DIVIDE BY 2 IF EVEN or 3 IF ODD
          */
 
-        if (primenums.contains(longPlankLength)) {
-            for (int i = 0; i < count; i++) {
-                tempList.add(longPlankLength);
-            }
-        } else if (longPlankLength % 2 == 0) {
-            
-            getPlanksLengths(longPlankLength / 2);
+//        if (primenums.contains(longPlankLength)) {
+//            for (int i = 0; i < count; i++) {
+//                tempList.add(longPlankLength);
+//            }
+//        } else if (longPlankLength % 2 == 0) {
+//
+//            getPlanksLengths(longPlankLength / 2);
+//
+//        } else if (longPlankLength % 3 == 0) {
+//            getPlanksLengths(longPlankLength / 3);
+//        }
+//
+//    }
 
-        } else if (longPlankLength % 3 == 0) {
-            getPlanksLengths(longPlankLength / 3);
-        }
-
-    }
 
 
 
-    //helper function that creates same arraylist over and over
-    public int arrayMaker()
 
     //divider helper method
     public int division(int[] n) {
@@ -83,12 +84,25 @@ public class SawPrimePlanks {
 
 
     // This will be a recursive method
-    public int sawPlank()
-    {
-
-        int tempInt = 10;
-
-        return tempInt;
+    public int sawPlank(int plankLength) {
+        int primeNumCheck = 2;
+        if (isPrime(plankLength)){
+            while(true){
+                if ((plankLength % primeNumCheck) == 0){
+                    for(int i = 0; i < primeNumCheck; i++) {
+                        sawPlank(plankLength/primeNumCheck);
+                    }
+                     break;
+                }
+            else {
+                primeNumCheck++;
+                }
+            }
+        }
+    else {
+        length.add(plankLength);
+        }
+        return plankLength;
 
     }
 }
