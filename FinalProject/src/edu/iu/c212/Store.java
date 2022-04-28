@@ -172,7 +172,7 @@ public class Store implements IStore
 
     // Add an item inventory.txt, record that in the output file
     // Whatever parses is meant to know those variables separately messed up
-    public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle) throws IOException
+    public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
     {
         try
         {
@@ -197,12 +197,11 @@ public class Store implements IStore
         {
             System.exit(0);
         }
-
     }
 
     // Command parser derives name and then calls COST after stripping '' from 'itemname'
     // - Josh
-    public void COST(String itemName) throws IOException
+    public void COST(String itemName)
     {
         try
         {
@@ -228,7 +227,6 @@ public class Store implements IStore
         {
             System.exit(0);
         }
-
     }
 
     // Meant to parse
@@ -261,7 +259,7 @@ public class Store implements IStore
     }
 
     // Fire command
-    public void FIRE(String name)
+    public void FIRE(String name) throws IOException
     {
         try
         {
@@ -305,14 +303,81 @@ public class Store implements IStore
 
     }
 
-    public void SELL()
+    public void SELL(String itemName, int itemQuantity)
     {
+        try
+        {
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            // Remove the given quantity from the inventory line to inventory
+            Item itemFound = new Item("Null", 0.0, 1, 1);
+
+            for (Item item: itemList)
+            {
+                if(item.getName().equals(itemName))
+                {
+                    itemFound = item;
+                }
+            }
+
+            if (itemFound.getName().equals("Null"))
+            {
+                out.println("ERROR: " + itemName + " could not be sold.");
+            }
+            else
+            {
+                if(itemFound.getQuantity() < itemQuantity)
+                {
+                    out.println("ERROR: " + itemName + " could not be sold.");
+                }
+                else if(itemFound.getQuantity() >= itemQuantity)
+                {
+                    // Calculate new quantity
+                    int itemFoundQuantity = itemFound.getQuantity();
+                    int finalQuantity = itemFoundQuantity - itemQuantity; // Finally, getting new quantity total
+                    itemFound.setQuantity(finalQuantity);
+
+                    // Print to out
+                    out.println(itemQuantity + itemName + " was sold.");
+                }
+            }
+
+            out.close();
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 
-    public void QUANTITY()
+    public void QUANTITY(String itemName)
     {
+        try
+        {
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            double itemQuantity = 0.0;
+            //Find the cost
+            for (Item item: itemList)
+            {
+                if(item.getName().equals(itemName))
+                {
+                    itemQuantity = item.getPrice();
+                }
+            }
+
+            out.println(itemName +": #" + itemQuantity);
+
+            out.close();
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 }
 

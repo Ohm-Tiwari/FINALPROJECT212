@@ -39,7 +39,13 @@ public class Item
         return aisleNum;
     }
 
-    public void setAisle(int aisleNum){
+    public void setAisle(int aisleNum)
+    {
         this.aisleNum = aisleNum;
+    }
+
+    public void setQuantity(int tempQuantity)
+    {
+        this.quantity = tempQuantity;
     }
 }
