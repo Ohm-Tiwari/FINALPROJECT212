@@ -17,20 +17,7 @@ public class SawPrimePlanks {
          *  IF LPH CAN BE DIVIDED FROM A NUMBER IN PRIME NUM
          * ELSE DIVIDE BY 2 IF EVEN or 3 IF ODD
          */
-
-//        if (primenums.contains(longPlankLength)) {
-//            for (int i = 0; i < count; i++) {
-//                tempList.add(longPlankLength);
-//            }
-//        } else if (longPlankLength % 2 == 0) {
-//
-//            getPlanksLengths(longPlankLength / 2);
-//
-//        } else if (longPlankLength % 3 == 0) {
-//            getPlanksLengths(longPlankLength / 3);
-//        }
-//
-//    }
+        
 
 
 
