@@ -17,7 +17,7 @@ public class SawPrimePlanks {
          *  IF LPH CAN BE DIVIDED FROM A NUMBER IN PRIME NUM
          * ELSE DIVIDE BY 2 IF EVEN or 3 IF ODD
          */
-        
+
 
 
 
