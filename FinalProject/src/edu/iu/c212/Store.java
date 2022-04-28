@@ -192,6 +192,10 @@ public class Store implements IStore
             out.println(itemName + " was added to inventory.");
 
             out.close();
+
+            // Make and add item to our list
+            Item newProduct = new Item(itemName, itemCost, itemQuantity, itemAisle);
+            itemList.add(newProduct);
         }
         catch (IOException e)
         {
@@ -288,9 +292,33 @@ public class Store implements IStore
         }
     }
 
-    public void HIRE(String staffName, int staffAge, String staffRole, String Availability)
+    public void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
     {
+        try
+        {
+            // Writer for Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            // Writer for Staff Availability
+            FileWriter outputToStaff = new FileWriter(staffAvailabilityFile, true);
+            PrintWriter outToStaff = new PrintWriter(outputToStaff, true);
+
+            // Write staff in
+            outToStaff.println(staffName + "," + staffAge + "," + staffRole + "," + staffAvailability);
+
+            // Write output
+            out.println(staffName + " has been hired as a " + staffRole);
+
+            // Make staff object, add to list
+            Staff newStaffMember = new Staff(staffName, staffAge, staffRole, staffAvailability);
+            staffList.add(newStaffMember);
+
+        }
+        catch(IOException e)
+        {
+            System.exit(0);
+        }
     }
 
     public void SAW()
