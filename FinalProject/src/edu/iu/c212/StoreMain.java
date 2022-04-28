@@ -1,9 +1,13 @@
 package edu.iu.c212;
 
+import java.io.FileNotFoundException;
+
 public class StoreMain
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws FileNotFoundException
     {
+        Store store = new Store();
+
         //Instantiate and manage store object here
     }
 }

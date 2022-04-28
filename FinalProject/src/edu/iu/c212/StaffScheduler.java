@@ -24,8 +24,6 @@ public class StaffScheduler
         File scheduleOutFile = new File("src/edu/iu/c212/resources/staff_availability_OUT.txt");
         Writer scheduleWriter = new FileWriter(scheduleOutFile);
 
-
-
     }
 
     public List<Staff> getSchedules() {
