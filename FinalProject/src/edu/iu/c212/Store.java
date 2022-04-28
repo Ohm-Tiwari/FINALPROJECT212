@@ -2,6 +2,8 @@ package edu.iu.c212;
 
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
+import edu.iu.c212.programs.StoreMap;
+import edu.iu.c212.programs.StoreMapDisplay;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -259,7 +261,39 @@ public class Store implements IStore
     }
     public void FIND(String itemName)
     {
+        try
+        {
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            // Find the item
+            Item itemFound = new Item("Null", 0.0, 1, 1);
+
+            for (Item item: itemList)
+            {
+                if(item.getName().equals(itemName))
+                {
+                    itemFound = item;
+                }
+            }
+
+            if (itemFound.getName().equals("Null"))
+            {
+                out.println("ERROR: " + itemName + " cannot be found.");
+            }
+            else
+            {
+                out.println("Performing store lookup for " + itemName);
+
+                // Create the store map
+                StoreMap storeMap = new StoreMap(itemFound.getAisle());
+            }
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 
     // Fire command
@@ -328,7 +362,18 @@ public class Store implements IStore
 
     public void SCHEDULE()
     {
+        try
+        {
+            // Write to Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            out.println("Schedule Created.");
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 
     public void SELL(String itemName, int itemQuantity)
