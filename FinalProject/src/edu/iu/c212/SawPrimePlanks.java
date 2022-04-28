@@ -18,11 +18,6 @@ public class SawPrimePlanks {
          * ELSE DIVIDE BY 2 IF EVEN or 3 IF ODD
          */
 
-
-
-
-
-
     //divider helper method
     public int division(int[] n) {
         int quotient = n[0];
@@ -43,17 +38,6 @@ public class SawPrimePlanks {
      *  quotient divisble by prime number after dividing by two -> count amount of times divided by two * prime number
      *
      */
-
-
-    ArrayList<Integer> primenums = new ArrayList<Integer>();
-     public void PrimeNums()
-     {
-         primenums.add(97); primenums.add(89);primenums.add(83);primenums.add(79);primenums.add(73);
-         primenums.add(71);primenums.add(67); primenums.add(61);primenums.add(59);primenums.add(53);
-         primenums.add(47);primenums.add(43);primenums.add(41);primenums.add(37);primenums.add(31);
-         primenums.add(29);primenums.add(23);primenums.add(19);primenums.add(17);primenums.add(13);
-         primenums.add(11); primenums.add(7);primenums.add(5);primenums.add(4);primenums.add(3);primenums.add(2);
-     }
 
 
     //checks if number is primenum
