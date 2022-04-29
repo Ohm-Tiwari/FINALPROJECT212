@@ -180,10 +180,10 @@ public class FileUtils {
 
     }
 
-    // Command Functions
+    // Command Functions \\
 
-    // ADD Command Function
-    public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
+    // ADD Command Method
+    private void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
     {
         // Make and add item to our list
         Item newProduct = new Item(itemName, itemCost, itemQuantity, itemAisle);
@@ -197,8 +197,8 @@ public class FileUtils {
     }
 
 
-    // COST Command Function
-    public void COST(String itemName)
+    // COST Command Method
+    private void COST(String itemName)
     {
         double itemCost = 0.0;
         //Find the cost
@@ -213,7 +213,7 @@ public class FileUtils {
         FileUtils.writeLineToOutputFile(itemName +": $" + itemCost);
     }
 
-    // EXIT Command Function
+    // EXIT Command Method
     public void EXIT() throws FileNotFoundException, IOException
     {
         System.out.println("Press enter to continue...");
@@ -222,8 +222,8 @@ public class FileUtils {
         FileUtils.writeLineToOutputFile("Thank you for visiting High's Hardware and Gardening!");
     }
 
-    // FIND Command Function (uses StoreMap)
-    public void FIND(String itemName)
+    // FIND Command Method (uses StoreMap)
+    private void FIND(String itemName)
     {
         // Find the item
         Item itemFound = new Item("Null", 0.0, 1, 1);
@@ -248,8 +248,8 @@ public class FileUtils {
         }
     }
 
-    // Fire command
-    public void FIRE(String name)
+    // FIRE Command Method
+    private void FIRE(String staffName)
     {
         // Variable for fail condition
         Staff staffToRemove = new Staff("Null", 28, "g", "");
@@ -257,7 +257,7 @@ public class FileUtils {
         // Find that staff member
         for (Staff staff: Store.staffList)
         {
-            if(staff.getName().equals(name))
+            if(staff.getName().equals(staffName))
             {
                 staffToRemove = staff;
             }
@@ -265,46 +265,37 @@ public class FileUtils {
 
         if (staffToRemove.getName().equals("Null"))
         {
-            FileUtils.writeLineToOutputFile("ERROR: " + name + " cannot be found.");
+            FileUtils.writeLineToOutputFile("ERROR: " + staffName + " cannot be found.");
         }
         else
         {
             //Remove staff from list
             Store.staffList.remove(staffFile);
 
-            //Write new list to staffFile
+            //Write updated list to staffFile
             writeStaffToFile(Store.staffList);
 
             // Write output line
-            writeLineToOutputFile(name + " was fired.");
+            writeLineToOutputFile(staffName + " was fired.");
         }
     }
 
-    public void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
+    // HIRE Command Method
+    private void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
     {
-        try
-        {
+        // Make staff object, add to list
+        Staff newStaffMember = new Staff(staffName, staffAge, staffRole, staffAvailability);
+        Store.staffList.add(newStaffMember);
 
+        //Write updated list to staffFile
+        writeStaffToFile(Store.staffList);
 
-            // Writer for Staff Availability
-
-
-            // Write output
-            out.println(staffName + " has been hired as a " + staffRole);
-
-            // Make staff object, add to list
-            Staff newStaffMember = new Staff(staffName, staffAge, staffRole, staffAvailability);
-            Store.staffList.add(newStaffMember);
-
-        }
-        catch(IOException e)
-        {
-            System.exit(0);
-        }
+        // Write output line
+        writeLineToOutputFile(staffName + " has been hired as a " + staffRole);
     }
 
-    // Usage of SawPrimePlanks
-    public void SAW()
+    // SAW Command Method (uses SawPrimePlanks)
+    private void SAW()
     {
         try
         {
@@ -353,23 +344,18 @@ public class FileUtils {
         }
     }
 
-    // Essentially just a trigger for the subprogram: StaffScheduler
+    // SCHEDULE Command Method (uses StaffScheduler)
     public void SCHEDULE()
     {
         try
         {
-            // Writer for Output
-            FileWriter output = new FileWriter(inventoryFile, false);
-            PrintWriter out = new PrintWriter(output, true);
-
             // Make scheduler object
             StaffScheduler staffScheduler = new StaffScheduler();
 
             // Use Subprogram
             staffScheduler.ScheduleStaff();
 
-            // Write to Output
-            out.println("Schedule Created.");
+            writeLineToOutputFile("Schedule Created.");
         }
         catch (IOException e)
         {
@@ -377,89 +363,57 @@ public class FileUtils {
         }
     }
 
-    // Sells object from staff scheduler
+    // SELL Command Method
     public void SELL(String itemName, int itemQuantity)
     {
-        try
+        // Remove the given quantity from the inventory line to inventory
+        Item itemFound = new Item("Null", 0.0, 1, 1);
+
+        for (Item item: Store.itemList)
         {
-            // Write to Output
-            FileWriter output = new FileWriter(outputFile, true);
-            PrintWriter out = new PrintWriter(output, true);
-
-            // Remove the given quantity from the inventory line to inventory
-            Item itemFound = new Item("Null", 0.0, 1, 1);
-
-            for (Item item: Store.itemList)
+            if(item.getName().equals(itemName))
             {
-                if(item.getName().equals(itemName))
-                {
-                    itemFound = item;
-                }
+                itemFound = item;
             }
-
-            if (itemFound.getName().equals("Null"))
-            {
-                out.println("ERROR: " + itemName + " could not be sold.");
-            }
-            else
-            {
-                if(itemFound.getQuantity() < itemQuantity)
-                {
-                    out.println("ERROR: " + itemName + " could not be sold.");
-                }
-                else if(itemFound.getQuantity() >= itemQuantity)
-                {
-                    // Calculate new quantity
-                    int itemFoundQuantity = itemFound.getQuantity();
-                    int finalQuantity = itemFoundQuantity - itemQuantity; // Finally, getting new quantity total
-                    itemFound.setQuantity(finalQuantity);
-
-                    // Print to out
-                    out.println(itemQuantity + itemName + " was sold.");
-                }
-            }
-
-            out.close();
         }
-        catch (IOException e)
+
+        if (itemFound.getName().equals("Null"))
         {
-            System.exit(0);
+            FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be sold.");
+        }
+        else
+        {
+            if(itemFound.getQuantity() < itemQuantity)
+            {
+                FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be sold.");
+            }
+            else if(itemFound.getQuantity() >= itemQuantity)
+            {
+                // Calculate new quantity
+                int itemFoundQuantity = itemFound.getQuantity();
+                int finalQuantity = itemFoundQuantity - itemQuantity; // Finally, getting new quantity total
+                itemFound.setQuantity(finalQuantity);
+
+                // Print to out
+                FileUtils.writeLineToOutputFile(itemQuantity + " " + itemName + " was sold.");
+
+            }
         }
     }
 
-    public void QUANTITY(String itemName)
+    private void QUANTITY(String itemName)
     {
-        try
+        double itemQuantity = 0.0;
+        //Find the cost
+        for (Item item: Store.itemList)
         {
-            // Write to Output
-            FileWriter output = new FileWriter(outputFile, true);
-            PrintWriter out = new PrintWriter(output, true);
-
-            double itemQuantity = 0.0;
-            //Find the cost
-            for (Item item: Store.itemList)
+            if(item.getName().equals(itemName))
             {
-                if(item.getName().equals(itemName))
-                {
-                    itemQuantity = item.getPrice();
-                }
+                itemQuantity = item.getPrice();
             }
-
-            out.println(itemName +": #" + itemQuantity);
-
-            out.close();
         }
-        catch (IOException e)
-        {
-            System.exit(0);
-        }
-    }
 
-    // Helper ItemList Builder
-    private void itemListToInventoryTxt()
-    {
-
-
+        FileUtils.writeLineToOutputFile(itemName +": #" + itemQuantity);
     }
 }
 
