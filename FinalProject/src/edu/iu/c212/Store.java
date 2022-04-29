@@ -3,7 +3,6 @@ package edu.iu.c212;
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
 import edu.iu.c212.programs.StoreMap;
-import edu.iu.c212.programs.StoreMapDisplay;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -89,7 +88,7 @@ public class Store implements IStore
     public List<Item> getItemsFromFile(File inputFile) throws FileNotFoundException
     {
         List<Item> inList = new ArrayList<>();
-        Scanner in = new Scanner(inputFile);
+        Scanner in = new Scanner(inventoryFile);
         in.nextLine();
         in.useDelimiter(",|\\n");
         int index = 0;
@@ -259,6 +258,8 @@ public class Store implements IStore
         }
 
     }
+
+    // Essentially just a trigger for the subprogram: StoreMap
     public void FIND(String itemName)
     {
         try
@@ -355,19 +356,72 @@ public class Store implements IStore
         }
     }
 
+    // Usage of SawPrimePlanks
     public void SAW()
     {
+        try
+        {
+            // Writer for Output
+            FileWriter output = new FileWriter(outputFile, true);
+            PrintWriter out = new PrintWriter(output, true);
 
+            // Make scheduler object
+            SawPrimePlanks sawPrimePlanks = new SawPrimePlanks();
+
+            List<Item> plankList = new ArrayList<Item>();
+
+            // Derive non prime planks
+            for(Item item : itemList)
+            {
+                if(item.getName().substring(0, 5).equals("Plank"))
+                {
+                    plankList.add(item);
+                }
+            }
+
+            // Remove from inventory List
+
+            // Remove from inventory.txt
+            List<String> allOtherLines = new ArrayList<String>();
+            Scanner in = new Scanner(inventoryFile);
+            int index = 0;
+
+            while(in.hasNextLine())
+            {
+                if (index == 0)
+                {
+                    name = in.next();
+                    index++;
+                }
+
+                allOtherLines.add(in.nextLine());
+            }
+
+            // Write to Output
+            out.println("Planks Sawed.");
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 
+    // Essentially just a trigger for the subprogram: StaffScheduler
     public void SCHEDULE()
     {
         try
         {
-            // Write to Output
-            FileWriter output = new FileWriter(outputFile, true);
+            // Writer for Output
+            FileWriter output = new FileWriter(inventoryFile, false);
             PrintWriter out = new PrintWriter(output, true);
 
+            // Make scheduler object
+            StaffScheduler staffScheduler = new StaffScheduler();
+
+            // Use Subprogram
+            staffScheduler.ScheduleStaff();
+
+            // Write to Output
             out.println("Schedule Created.");
         }
         catch (IOException e)
@@ -376,6 +430,7 @@ public class Store implements IStore
         }
     }
 
+    // Sells object from staff scheduler
     public void SELL(String itemName, int itemQuantity)
     {
         try
@@ -451,6 +506,37 @@ public class Store implements IStore
         {
             System.exit(0);
         }
+    }
+
+    // Helper ItemList Builder
+    private void itemListToInventoryTxt()
+    {
+        try
+        {
+            FileWriter inventoryInput = new FileWriter(inventoryFile, false);
+            PrintWriter rewriter = new PrintWriter(inventoryInput, true);
+
+            // Build the items back into strings
+            List<String> itemStrings = new ArrayList<String>();
+            for (Item item : itemList)
+            {
+                String itemFormat = item.getName() + ("" + item.getPrice()) + ("" + item.getQuantity()) + ("" + item.getAisle());
+                itemStrings.add(itemFormat);
+            }
+
+            // Then rewrite the list
+            for (String item: itemStrings)
+            {
+                rewriter.println(item);
+            }
+
+            rewriter.close();
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
+
     }
 }
 
