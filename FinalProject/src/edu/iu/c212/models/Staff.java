@@ -18,6 +18,7 @@ public class Staff
         this.role = role;
         this.availability = availability;
     }
+
     public Staff(String fullName, int age, String role, String availability, boolean worked){
         this.fullName = fullName;
         this.age = age;

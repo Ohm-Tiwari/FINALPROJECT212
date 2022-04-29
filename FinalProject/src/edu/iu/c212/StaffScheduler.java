@@ -132,32 +132,32 @@ public class StaffScheduler
             scheduleWriter.write("(" + mon.get(i) + ") ");
 
         }
-        scheduleWriter.write("T ");
+        scheduleWriter.write(System.getProperty("line.separator") + "T ");
         for (int i = 0; i < tues.size(); i++) {
             scheduleWriter.write("(" + tues.get(i) + ") ");
 
         }
-        scheduleWriter.write("W ");
+        scheduleWriter.write(System.getProperty("line.separator") + "W ");
         for (int i = 0; i < wed.size(); i++) {
             scheduleWriter.write("(" + wed.get(i) + ") ");
 
         }
-        scheduleWriter.write("TR ");
+        scheduleWriter.write(System.getProperty("line.separator") + "TR ");
         for (int i = 0; i < thur.size(); i++) {
             scheduleWriter.write("(" + thur.get(i) + ") ");
 
         }
-        scheduleWriter.write("F ");
+        scheduleWriter.write(System.getProperty("line.separator") + "F ");
         for (int i = 0; i < fri.size(); i++) {
             scheduleWriter.write("(" + fri.get(i) + ") ");
 
         }
-        scheduleWriter.write("SAT ");
+        scheduleWriter.write(System.getProperty("line.separator") + "SAT ");
         for (int i = 0; i < sat.size(); i++) {
             scheduleWriter.write("(" + sat.get(i) + ") ");
 
         }
-        scheduleWriter.write("SUN ");
+        scheduleWriter.write(System.getProperty("line.separator") + "SUN ");
         for (int i = 0; i < sun.size(); i++) {
             scheduleWriter.write("(" + sun.get(i) + ") ");
 
