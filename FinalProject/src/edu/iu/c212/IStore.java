@@ -11,9 +11,9 @@ import edu.iu.c212.utils.FileUtils;
 public interface IStore
 {
     // Abstract Methods
-    List<Item> getItemsFromFile(File inputFile) throws FileNotFoundException;
-    List<Staff> getStaffFromFile(File inputFile) throws FileNotFoundException;
-    void saveItemsFromFile(File inputFile) throws FileNotFoundException;
-    void saveStaffFromFile(File inputFile) throws  FileNotFoundException;
-    void takeAction() throws FileNotFoundException;
+    List<Item> getItemsFromFile();
+    List<Staff> getStaffFromFile();
+    void saveItemsFromFile();
+    void saveStaffFromFile();
+    void takeAction();
 }
