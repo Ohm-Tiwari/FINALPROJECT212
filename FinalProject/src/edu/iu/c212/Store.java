@@ -3,6 +3,8 @@ package edu.iu.c212;
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
 import edu.iu.c212.programs.StoreMap;
+import edu.iu.c212.programs.StoreMapDisplay;
+import edu.iu.c212.utils.FileUtils;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -19,40 +21,14 @@ public class Store implements IStore
     static List<Item> itemList;
     static List<Staff> staffList;
 
-    static String name;
-    static double price;
-    static int quantity;
-    static int aisleNum;
-
-    static String fName;
-    static String lName;
-    static int age;
-    static String role;
-    static String availability;
-
-    // Files
-    static File inventoryFile;
-    static File inputFile;
-    static File outputFile;
-    static File staffScheduleInputFile;
-    static File staffAvailabilityFile;
-    static File storeScheduleOutputFile;
-
     //Command booleans
     protected static boolean exitCommandMenu;
 
     // Constructor
-    public Store() throws FileNotFoundException
+    public Store()
     {
-        try {
-            // Fill files
-            inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
-            staffAvailabilityFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
-            outputFile = new File("src/edu/iu/c212/resources/output.txt");
-            staffScheduleInputFile = new File("src/edu/iu/c212/resources/shift_schedules_IN.txt");
-            storeScheduleOutputFile = new File("src/edu/iu/c212/resources/store_schedule_OUT.txt");
-            inputFile = new File("src/edu/iu/c212/resources/input.txt");
-
+        try
+        {
             // Trigger take action
             takeAction();
 
@@ -74,8 +50,8 @@ public class Store implements IStore
         try
         {
             // Create the lists
-            saveItemsFromFile(inventoryFile);
-            saveStaffFromFile(staffAvailabilityFile);
+            saveItemsFromFile();
+            saveStaffFromFile();
         }
         catch(FileNotFoundException e)
         {
@@ -87,30 +63,16 @@ public class Store implements IStore
     @Override
     public List<Item> getItemsFromFile(File inputFile) throws FileNotFoundException
     {
-        List<Item> inList = new ArrayList<>();
-        Scanner in = new Scanner(inventoryFile);
-        in.nextLine();
-        in.useDelimiter(",|\\n");
-        int index = 0;
-
-        while(in.hasNext()){
-            if (index == 0) {
-                name = in.next();
-                index++;
-            } else if (index == 1) {
-                price = Double.parseDouble(in.next());
-                index++;
-            } else if (index == 2) {
-                quantity = Integer.parseInt(in.next());
-                index++;
-            } else if (index == 3) {
-                aisleNum = Integer.parseInt(in.next());
-                inList.add(new Item(name, price, quantity, aisleNum));
-                index = 0;
-            }
+        try
+        {
+            List<Item> inList = FileUtils.readInventoryFromFile();
+            return inList;
         }
-
-        return inList;
+        catch (IOException e)
+        {
+            System.exit(0);
+            return null;
+        }
     }
 
     @Override
@@ -208,30 +170,16 @@ public class Store implements IStore
     // - Josh
     public void COST(String itemName)
     {
-        try
+        double itemCost = 0.0;
+        //Find the cost
+        for (Item item: itemList)
         {
-            double itemCost = 0.0;
-            //Find the cost
-            for (Item item: itemList)
+            if(item.getName().equals(itemName))
             {
-                if(item.getName().equals(itemName))
-                {
-                    itemCost = item.getPrice();
-                }
+                itemCost = item.getPrice();
             }
-
-            // Write to Output
-            FileWriter output = new FileWriter(outputFile, true);
-            PrintWriter out = new PrintWriter(output, true);
-
-            out.println(itemName +": $" + itemCost);
-
-            out.close();
         }
-        catch (IOException e)
-        {
-            System.exit(0);
-        }
+        FileUtils.writeLineToOutputFile(itemName +": $" + itemCost);
     }
 
     // Meant to parse
@@ -288,7 +236,7 @@ public class Store implements IStore
                 out.println("Performing store lookup for " + itemName);
 
                 // Create the store map
-                StoreMap storeMap = new StoreMap(itemFound.getAisle());
+                StoreMapDisplay.display(itemFound);
             }
         }
         catch (IOException e)
@@ -530,6 +478,7 @@ public class Store implements IStore
                 rewriter.println(item);
             }
 
+            inventoryInput.close();
             rewriter.close();
         }
         catch (IOException e)
