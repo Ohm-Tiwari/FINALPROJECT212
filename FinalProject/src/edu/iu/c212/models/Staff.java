@@ -8,7 +8,7 @@ public class Staff
     private int age;
     private String role;
     private String availability;
-    private boolean worked;
+    private double hoursWorked;
 
     // Constructor
     public Staff(String fullName, int age, String role, String availability)
@@ -19,12 +19,12 @@ public class Staff
         this.availability = availability;
     }
 
-    public Staff(String fullName, int age, String role, String availability, boolean worked){
+    public Staff(String fullName, int age, String role, String availability, double hoursWorked){
         this.fullName = fullName;
         this.age = age;
         this.role = role;
         this.availability = availability;
-        this.worked = worked;
+        this.hoursWorked = hoursWorked;
     }
 
     // Methods
@@ -45,7 +45,9 @@ public class Staff
 
     public String getAvailability() { return availability; }
 
-    public boolean getWorked() { return worked; }
+    public double getHoursWorked() { return hoursWorked; }
+
+    public void addHours(double h) { hoursWorked =+ h; }
 
     public void setRole(String role){
         this.role = role;
