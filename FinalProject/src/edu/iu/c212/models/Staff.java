@@ -1,5 +1,6 @@
 package edu.iu.c212.models;
 
+
 public class Staff
 {
     // Instance variables
@@ -48,5 +49,7 @@ public class Staff
     public void setRole(String role){
         this.role = role;
     }
+
+
 
 }
