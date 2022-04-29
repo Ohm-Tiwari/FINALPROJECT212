@@ -66,7 +66,7 @@ public class FileUtils {
         return returnList;
     }
 
-    public List<Staff> readStaffFromFile() throws IOException
+    public static List<Staff> readStaffFromFile() throws IOException
     {
         //Create return list
         List<Staff> returnList2 = new ArrayList<Staff>();
@@ -158,7 +158,8 @@ public class FileUtils {
         return null;
     }
 
-    public static void writeStoreScheduleToFile(List<String> lines) {
+    public static void writeStoreScheduleToFile(List<String> lines)
+    {
         // TODO
     }
 
@@ -221,7 +222,7 @@ public class FileUtils {
         FileUtils.writeLineToOutputFile("Thank you for visiting High's Hardware and Gardening!");
     }
 
-    // Essentially just a trigger for the subprogram: StoreMap
+    // FIND Command Function (uses StoreMap)
     public void FIND(String itemName)
     {
         // Find the item
@@ -248,31 +249,34 @@ public class FileUtils {
     }
 
     // Fire command
-    public void FIRE(String name) throws IOException
+    public void FIRE(String name)
     {
-        try
+        // Variable for fail condition
+        Staff staffToRemove = new Staff("Null", 28, "g", "");
+
+        // Find that staff member
+        for (Staff staff: Store.staffList)
         {
-            File newFile = new File("tempFile.txt");
-            BufferedReader input = new BufferedReader(new FileReader(staffScheduleInputFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile));
-            for (int i = 0; i < Store.staffList.size(); i++) {
-                if(Store.staffList.get(i).getName().equals(name))
-                {
-                    // Supposed to be empty
-                }
-                else
-                {
-                    writer.write(Store.staffList.get(i).getName() + " " + Store.staffList.get(i).getAge() + " " + Store.staffList.get(i).getRole() + " " + Store.staffList.get(i).getAvailability() + System.getProperty("line.separator"));
-                }
+            if(staff.getName().equals(name))
+            {
+                staffToRemove = staff;
             }
-            boolean result = newFile.renameTo(inputFile);
-            input.close();
-            writer.close();
         }
-        catch (IOException e)
+
+        if (staffToRemove.getName().equals("Null"))
         {
-            System.out.println("File could not be found!");
-            System.exit(0);
+            FileUtils.writeLineToOutputFile("ERROR: " + name + " cannot be found.");
+        }
+        else
+        {
+            //Remove staff from list
+            Store.staffList.remove(staffFile);
+
+            //Write new list to staffFile
+            writeStaffToFile(Store.staffList);
+
+            // Write output line
+            writeLineToOutputFile(name + " was fired.");
         }
     }
 
@@ -459,4 +463,4 @@ public class FileUtils {
     }
 }
 
-}
+

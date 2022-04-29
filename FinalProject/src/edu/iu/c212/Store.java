@@ -15,8 +15,7 @@ import java.awt.event.KeyListener;
 
 import static edu.iu.c212.Store.exitCommandMenu;
 
-public class Store implements IStore
-{
+public class Store implements IStore {
 
     // Final lists
     public static List<Item> itemList;
@@ -26,8 +25,7 @@ public class Store implements IStore
     public static boolean exitCommandMenu;
 
     // Constructor
-    public Store()
-    {
+    public Store() {
         // Trigger take action
         takeAction();
 
@@ -38,8 +36,7 @@ public class Store implements IStore
 
     // Methods
     @Override
-    public void takeAction()
-    {
+    public void takeAction() {
         // Create the lists
         saveItemsFromFile();
         saveStaffFromFile();
@@ -47,48 +44,38 @@ public class Store implements IStore
 
 
     @Override
-    public List<Item> getItemsFromFile()
-    {
-        try
-        {
+    public List<Item> getItemsFromFile() {
+        try {
             List<Item> inList = FileUtils.readInventoryFromFile();
             return inList;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.exit(0);
             return null;
         }
     }
 
     @Override
-    public List<Staff> getStaffFromFile()
-    {
-        try
-        {
+    public List<Staff> getStaffFromFile() {
+        try {
             List<Staff> inList = FileUtils.readStaffFromFile();
             return inList;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.exit(0);
             return null;
         }
     }
 
     @Override
-    public void saveItemsFromFile()
-    {
+    public void saveItemsFromFile() {
         itemList = getItemsFromFile();
     }
 
     @Override
-    public void saveStaffFromFile()
-    {
+    public void saveStaffFromFile() {
         staffList = getStaffFromFile();
     }
 
-
+}
 
 class Keyboard implements KeyListener
 {
