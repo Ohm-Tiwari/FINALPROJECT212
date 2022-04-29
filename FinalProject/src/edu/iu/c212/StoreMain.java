@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static edu.iu.c212.Store.inputFile;
+import static edu.iu.c212.utils.FileUtils.inputFile;
 
 public class StoreMain {
     public static void main(String[] args) throws FileNotFoundException {
@@ -40,7 +41,7 @@ public class StoreMain {
 
         }
         else if(in.next().equals("QUANTITY")){
-            
+
         }
     }
 }
