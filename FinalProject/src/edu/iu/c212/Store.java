@@ -35,7 +35,7 @@ public class Store implements IStore {
     public void takeAction()
     {
         // Create the lists
-        //saveItemsFromFile();
+        saveItemsFromFile();
         saveStaffFromFile();
         FileUtils file = new FileUtils();
         try
@@ -45,61 +45,76 @@ public class Store implements IStore {
 
             for (String commandLine: commandList)
             {
-                if (commandLine.substring(0,2).equals("ADD")) // ADD command
+                if(commandLine.length() == 0)
+                {
+                    System.out.println("Empty strings");
+                }
+                else if (commandLine.substring(0,3).equals("ADD")) // ADD command
                 {
                     String[] split = commandLine.split(" ");
-                    String name = split[1].substring(1, split[1].length() - 1);
-                    file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
+                    String name = split[1].substring(1, split[1].length());
+                    System.out.println("Length" + split.length);
+                    if(split.length == 7)
+                    {
+                        file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
+                    }
+                    else
+                    {
+                        String name1 = split[2].substring(0, split[1].length() - 1);
+                        String actualName = name + name1;
+                        file.ADD(actualName, Double.parseDouble(split[3]), Integer.parseInt(split[5]), Integer.parseInt(split[7]));
+                    }
+
                 }
-                else if (commandLine.substring(0,2).equals("COS")) // COST command
+                else if (commandLine.substring(0,3).equals("COS")) // COST command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.COST(name);
                 }
-                else if (commandLine.substring(0,2).equals("EXI")) // EXIT command
+                else if (commandLine.substring(0,3).equals("EXI")) // EXIT command
                 {
                     file.EXIT();
                 }
-                else if (commandLine.substring(0,2).equals("FIN")) // FIND command
+                else if (commandLine.substring(0,3).equals("FIN")) // FIND command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.FIND(name);
                 }
-                else if (commandLine.substring(0,2).equals("FIR")) // FIRE command
+                else if (commandLine.substring(0,3).equals("FIR")) // FIRE command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.FIRE(name);
                 }
-                else if (commandLine.substring(0,2).equals("HIR")) // HIRE command
+                else if (commandLine.substring(0,3).equals("HIR")) // HIRE command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.HIRE(name, Integer.parseInt(split[2]), split[3], split[4]);
                 }
-                else if(commandLine.substring(0,2).equals("PRO")) // PROMOTE command
+                else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.PROMOTE(name, split[2]);
                 }
-                else if(commandLine.substring(0,2).equals("SAW")) // SAW command
+                else if(commandLine.substring(0,3).equals("SAW")) // SAW command
                 {
                     file.SAW();
                 }
-                else if(commandLine.substring(0,2).equals("SCH")) // SCHEDULE command
+                else if(commandLine.substring(0,3).equals("SCH")) // SCHEDULE command
                 {
                     file.SCHEDULE();
                 }
-                else if(commandLine.substring(0,2).equals("SEL")) // SELL command
+                else if(commandLine.substring(0,3).equals("SEL")) // SELL command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
                     file.SELL(name, Integer.parseInt(split[2]));
                 }
-                else if(commandLine.substring(0,2).equals("QUA")) // QUANTITY command
+                else if(commandLine.substring(0,3).equals("QUA")) // QUANTITY command
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
