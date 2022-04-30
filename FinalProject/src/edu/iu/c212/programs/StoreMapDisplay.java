@@ -31,4 +31,6 @@ public class StoreMapDisplay
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
+
+
 }
