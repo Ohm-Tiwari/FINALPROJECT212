@@ -49,7 +49,8 @@ public class FileUtils {
 
         while(in.hasNext()){
             if (index == 0) {
-                name = in.next();
+                String tempName = in.next();
+                name = tempName.substring(1, tempName.length() - 1);
                 index++;
             } else if (index == 1) {
                 price = Double.parseDouble(in.next());
@@ -307,6 +308,36 @@ public class FileUtils {
 
         // Write output line
         writeLineToOutputFile(staffName + " has been hired as a " + staffRole);
+    }
+
+    public void PROMOTE(String staffName, String staffRole)
+    {
+        // Grab staff member
+        Staff staffToPromote = new Staff("Null", 28, "g", "");
+
+        // Find that staff member
+        for (Staff staff: Store.staffList)
+        {
+            if(staff.getName().equals(staffName))
+            {
+                staffToPromote = staff;
+            }
+        }
+
+        if (staffToPromote.getName().equals("Null"))
+        {
+            FileUtils.writeLineToOutputFile("ERROR: " + staffName + " cannot be found.");
+        }
+        else
+        {
+            staffToPromote.setRole(staffRole);
+
+            //Write updated list with new role to staffFile
+            writeStaffToFile(Store.staffList);
+
+            // Write output line
+            writeLineToOutputFile( staffName + " has been hired as a " + staffRole);
+        }
     }
 
     // SAW Command Method (uses SawPrimePlanks)
