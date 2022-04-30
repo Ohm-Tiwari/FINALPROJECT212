@@ -297,51 +297,52 @@ public class FileUtils {
     // SAW Command Method (uses SawPrimePlanks)
     private void SAW()
     {
-        try
+        // Make scheduler object
+        SawPrimePlanks sawPrimePlanks = new SawPrimePlanks();
+
+        List<Item> plankList = new ArrayList<>();
+        List<Integer> plankLengthList = new ArrayList<>();
+
+        // Derive non prime planks
+        for(Item item : Store.itemList)
         {
-            // Writer for Output
-            FileWriter output = new FileWriter(outputFile, true);
-            PrintWriter out = new PrintWriter(output, true);
-
-            // Make scheduler object
-            SawPrimePlanks sawPrimePlanks = new SawPrimePlanks();
-
-            List<Item> plankList = new ArrayList<Item>();
-
-            // Derive non prime planks
-            for(Item item : Store.itemList)
+            if(item.getName().substring(0, 5).equals("Plank"))
             {
-                if(item.getName().substring(0, 5).equals("Plank"))
+                //Derive length from string
+                String itemLength = item.getName().substring(6, item.getName().length() + 1);
+                Integer plankLength = Integer.parseInt(itemLength);
+
+                if(!sawPrimePlanks.isPrime(plankLength))
                 {
-                    plankList.add(item);
-                }
-            }
+                    for (int i = 0; i < item.getQuantity(); i++)
+                    {
+                        plankList.add(item);
+                        plankLengthList.add(plankLength);
+                    }
 
-            // Remove from inventory List
-
-            // Remove from inventory.txt
-            List<String> allOtherLines = new ArrayList<String>();
-            Scanner in = new Scanner(inventoryFile);
-            int index = 0;
-
-            while(in.hasNextLine())
-            {
-                if (index == 0)
-                {
-                    name = in.next();
-                    index++;
+                    // Remove the item
+                    Store.itemList.remove(item);
                 }
 
-                allOtherLines.add(in.nextLine());
             }
+        }
 
-            // Write to Output
-            out.println("Planks Sawed.");
-        }
-        catch (IOException e)
+        int count = 0;
+
+        // Now saw those non-prime planks, and add them back to item list
+        for(Integer length : plankLengthList)
         {
-            System.exit(0);
+            List<Integer> plankPrimed = sawPrimePlanks.getPlanksLengths(length);
+            Item newItem = new Item("Plank-" + plankPrimed.get(0), plankList.get(count).getPrice(), plankPrimed.size(), plankList.get(count).getAisle());
+            Store.itemList.add(newItem);
+            count += 1;
         }
+
+        //Rewrite inventory.txt
+        writeInventoryToFile(Store.itemList);
+
+        // Write output line
+        writeLineToOutputFile("Planks Sawed.");
     }
 
     // SCHEDULE Command Method (uses StaffScheduler)
