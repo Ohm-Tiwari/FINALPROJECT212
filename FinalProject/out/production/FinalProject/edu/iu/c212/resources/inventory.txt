@@ -1,21 +1,22 @@
-'Hammer',30,2,3
-'Multi Bit Ratcheting',59,1,4
-'Paint cans',20,4,5
-'Pilers',15,5,1
-'Shovel',40,10,2
-'Fiskars',22,20,7
-'Hand trucks',29,8,3
-'Gas chain saw',39,3,4
-'Wheel Barrow',100,7,5
-'Shears',30,4,8
-'Cotton Hoe',43,2,8
-'Pottato Hook',54,5,3
-'Drill Forks',68,10,7
-'Potting Soils',9,12,4
-'Rakes',20,20,6
-'Pruners',43,2,10
-'Composters',70,4,11
-'Pots',21,5,11
-'Wood',14,80,12
-'Water Nosel',18,24,11
-'Leaf Blower',91,18,8
+Hammer',30.0,2,3
+'Multi Bit Ratcheting',59.0,1,4
+'Paint cans',20.0,4,5
+'Pilers',15.0,5,1
+'Shovel',40.0,10,2
+'Fiskars',22.0,20,7
+'Hand trucks',29.0,8,3
+'Gas chain saw',39.0,3,4
+'Wheel Barrow',100.0,7,5
+'Shears',30.0,4,8
+'Cotton Hoe',43.0,2,8
+'Pottato Hook',54.0,5,3
+'Drill Forks',68.0,10,7
+'Potting Soils',9.0,12,4
+'Rakes',20.0,20,6
+'Pruners',43.0,2,10
+'Composters',70.0,4,11
+'Pots',21.0,5,11
+'Wood',14.0,80,12
+'Water Nosel',18.0,24,11
+'Leaf Blower',91.0,18,8
+CordlessScrewdri',30.0,1,2
