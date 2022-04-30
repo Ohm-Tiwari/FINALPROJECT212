@@ -104,8 +104,13 @@ public class FileUtils {
                 index++;
             } else if (index == 4) {
                 availability = in.next();
-                returnList2.add(new Staff(fName, age, role, availability));
+                String fullName = fName + " " + lName;
+                returnList2.add(new Staff(fullName, age, role, availability));
                 index = 0;
+                if(in.hasNext())
+                {
+                    in.nextLine();
+                }
             }
         }
         return returnList2;

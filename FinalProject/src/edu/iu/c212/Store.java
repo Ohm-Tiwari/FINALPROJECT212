@@ -6,6 +6,7 @@ import edu.iu.c212.utils.FileUtils;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 import java.awt.event.KeyListener;
 
@@ -47,15 +48,34 @@ public class Store implements IStore {
             {
                 if(commandLine.length() == 0)
                 {
-                    System.out.println("Empty strings");
+                    //System.out.println("Empty strings");
                 }
                 else if (commandLine.substring(0,3).equals("ADD")) // ADD command
                 {
                     String[] split = commandLine.split(" ");
-                    String name = commandLine;
-                    System.out.println(commandLine);
-                    name = split[4].substring(0, name.indexOf("'"));
-                    //System.out.println("Length" + split.length);
+                    //System.out.println(split[2]);
+                    int count = 0;
+                    int index1 = 0;
+                    int index2 = 0;
+                    for (int i = 0; i < commandLine.length(); i++)
+                    {
+                        char chart = commandLine.charAt(i);
+                        if(chart == '’' || chart == '‘')
+                        {
+                            //System.out.println("worked");
+                            count += 1;
+                            if(count == 2)
+                            {
+                                index2 = i;
+                            }
+                            else if(count == 1)
+                            {
+                                index1 = i;
+                            }
+                        }
+                    }
+                    String name = commandLine.substring(index1 + 1, index2);
+                    //System.out.println(name);
                     file.ADD(name, Double.parseDouble(split[3]), Integer.parseInt(split[5]), Integer.parseInt(split[7]));
                 }
                 else if (commandLine.substring(0,3).equals("COS")) // COST command
@@ -83,17 +103,34 @@ public class Store implements IStore {
                 else if (commandLine.substring(0,3).equals("HIR")) // HIRE command
                 {
                     String[] split = commandLine.split(" ");
-                    String name = split[1].substring(1, split[1].length() - 1);
-                    System.out.println(split.length);
-                    if(split.length == 7)
+                    System.out.println(commandLine);
+                    int count = 0;
+                    int index1 = 0;
+                    int index2 = 0;
+                    for (int i = 0; i < commandLine.length(); i++)
                     {
-                        file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
+                        char chart = commandLine.charAt(i);
+                        //System.out.println(chart);
+                        if(chart == '’' || chart == '\'')
+                        {
+                            //System.out.println("worked");
+                            count += 1;
+                            if(count == 2)
+                            {
+                                index2 = i;
+                            }
+                            else if(count == 1)
+                            {
+                                index1 = i;
+                            }
+                        }
                     }
-                    else {
-                        String name1 = split[2].substring(0, split[1].length() - 1);
-                        String actualName = name + name1;
-                    }
-                    file.HIRE(name, Integer.parseInt(split[2]), split[3], split[4]);
+                    String name = commandLine.substring(index1 + 1, index2);
+                    //System.out.println(name);
+
+                    System.out.println(Arrays.stream(split).count());
+
+                    file.HIRE(name, Integer.parseInt(split[3]), split[4], split[4]);
                 }
                 else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
                 {

@@ -1,8 +1,34 @@
-Created on 4/12/2022 at 1727
-M (Kenneth White) (Catherine Garcia) (Amanda Smith)
-T (Jason Henderson) (Lisa Russell) (Jack Sanchez)
-W (Wanda Flores) (Anthony Mitchell) (Jack Sanchez)
-TR (Jason Henderson) (Earl Edwards) (Amanda Smith)
-F  (Kenneth White) (Catherine Garcia) (Carolyn Perry)
-SAT (Wanda Flores) (Earl Edwards) (Carolyn Perry)
-SUN (Jason Henderson) (Anthony Mitchell) (Carolyn Perry)
+M 
+(edu.iu.c212.models.Staff@446cdf90) 
+(edu.iu.c212.models.Staff@799f7e29) 
+(edu.iu.c212.models.Staff@4b85612c) 
+
+T 
+(edu.iu.c212.models.Staff@277050dc) 
+(edu.iu.c212.models.Staff@446cdf90) 
+(edu.iu.c212.models.Staff@5c29bfd) 
+
+W 
+(edu.iu.c212.models.Staff@799f7e29) 
+(edu.iu.c212.models.Staff@4b85612c) 
+(edu.iu.c212.models.Staff@7aec35a) 
+
+TR 
+(edu.iu.c212.models.Staff@67424e82) 
+(edu.iu.c212.models.Staff@42110406) 
+(edu.iu.c212.models.Staff@531d72ca) 
+
+F 
+(edu.iu.c212.models.Staff@22d8cfe0) 
+(edu.iu.c212.models.Staff@277050dc) 
+(edu.iu.c212.models.Staff@799f7e29) 
+
+SAT 
+(edu.iu.c212.models.Staff@277050dc) 
+(edu.iu.c212.models.Staff@5c29bfd) 
+(edu.iu.c212.models.Staff@799f7e29) 
+
+SUN 
+(edu.iu.c212.models.Staff@67424e82) 
+(edu.iu.c212.models.Staff@22d8cfe0) 
+(edu.iu.c212.models.Staff@531d72ca) 
