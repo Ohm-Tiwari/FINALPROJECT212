@@ -164,9 +164,18 @@ public class FileUtils {
         return commandList;
     }
 
-    public static void writeStoreScheduleToFile(List<String> lines)
+    public static void writeStoreScheduleToFile(List<String> lines) throws IOException
     {
-        // TODO
+        FileWriter scheduleWriter = new FileWriter(storeScheduleFile);
+        PrintWriter output = new PrintWriter(scheduleWriter, true);
+
+        for (String line : lines)
+        {
+            output.println(line);
+        }
+
+        output.close();
+        scheduleWriter.close();
     }
 
     // Should be implemented properly

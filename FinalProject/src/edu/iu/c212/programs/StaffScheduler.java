@@ -1,18 +1,18 @@
 package edu.iu.c212.programs;
 
 import edu.iu.c212.models.Staff;
+import edu.iu.c212.utils.FileUtils;
 
 import java.io.*;
 import java.util.*;
 
 import static edu.iu.c212.Store.staffList;
-import static edu.iu.c212.Store.storeScheduleOutputFile;
 
 public class StaffScheduler
 {
 
     // Methods
-    public void ScheduleStaff()
+    public void ScheduleStaff() throws IOException
     {
         List<Staff> schedules = getSchedules();
 
@@ -24,8 +24,7 @@ public class StaffScheduler
         List<Staff> sat = new ArrayList<>();
         List<Staff> sun = new ArrayList<>();
 
-        File storeScheduleFile = new File("../resources/store_schedule_OUT.txt");
-        Writer scheduleWriter = new FileWriter(storeScheduleFile);
+        List<String> scheduleList = new ArrayList<>();
 
         List<Staff> staffList = getSchedules();
 
@@ -39,13 +38,14 @@ public class StaffScheduler
             }
         }
         //picking the workers with the fewest amount of workable days and printing them
-        scheduleWriter.write("M ");
+        scheduleList.add("M ");
         for (int i = 0; i < mon.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + mon.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + mon.get(i) + ") ");
             }
 
         }
@@ -59,13 +59,14 @@ public class StaffScheduler
         //sorting them such that people who have worked the most hours go in the back
         Collections.sort(tues, StaffScheduler.HourSorter);
 
-        scheduleWriter.write(System.getProperty("line.separator") + "T ");
+        scheduleList.add(System.getProperty("line.separator") + "T ");
         for (int i = 0; i < tues.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + tues.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + tues.get(i) + ") ");
                 tues.get(i).addHours(9);
             }
         }
@@ -78,15 +79,16 @@ public class StaffScheduler
         }
         Collections.sort(wed, StaffScheduler.HourSorter);
 
-        scheduleWriter.write(System.getProperty("line.separator") + "W ");
+        scheduleList.add(System.getProperty("line.separator") + "W ");
 
         //picking the workers with the fewest amount of workable days and printing them
         for (int i = 0; i < wed.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + wed.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + wed.get(i) + ") ");
                 wed.get(i).addHours(9);
             }
         }
@@ -98,13 +100,14 @@ public class StaffScheduler
             }
         }
         Collections.sort(thur, StaffScheduler.HourSorter);
-        scheduleWriter.write(System.getProperty("line.separator") + "TR ");
+        scheduleList.add(System.getProperty("line.separator") + "TR ");
         for (int i = 0; i < thur.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + thur.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + thur.get(i) + ") ");
                 thur.get(i).addHours(9);
             }
         }
@@ -116,13 +119,14 @@ public class StaffScheduler
             }
         }
         Collections.sort(fri, StaffScheduler.HourSorter);
-        scheduleWriter.write(System.getProperty("line.separator") + "F ");
+        scheduleList.add(System.getProperty("line.separator") + "F ");
         for (int i = 0; i < fri.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + fri.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + fri.get(i) + ") ");
                 fri.get(i).addHours(9);
             }
         }
@@ -133,13 +137,15 @@ public class StaffScheduler
             }
         }
         Collections.sort(sat, StaffScheduler.HourSorter);
-        scheduleWriter.write(System.getProperty("line.separator") + "SAT ");
-        for (int i = 0; i < sat.size(); i++) {
+        scheduleList.add(System.getProperty("line.separator") + "SAT ");
+        for (int i = 0; i < sat.size(); i++)
+        {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + sat.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + sat.get(i) + ") ");
                 sat.get(i).addHours(12.5);
             }
         }
@@ -150,17 +156,19 @@ public class StaffScheduler
             }
         }
         Collections.sort(sun, StaffScheduler.HourSorter);
-        scheduleWriter.write(System.getProperty("line.separator") + "SUN ");
+        scheduleList.add(System.getProperty("line.separator") + "SUN ");
         for (int i = 0; i < sun.size(); i++) {
             if (i >= 3){
                 break;
             }
-            else{
-                scheduleWriter.write("(" + sun.get(i) + ") ");
+            else
+            {
+                scheduleList.add("(" + sun.get(i) + ") ");
                 sun.get(i).addHours(12.5);
             }
         }
-        scheduleWriter.close();
+
+        FileUtils.writeStoreScheduleToFile(scheduleList);
     }
 
     public List<Staff> getSchedules() {
