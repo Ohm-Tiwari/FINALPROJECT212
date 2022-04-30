@@ -198,7 +198,7 @@ public class FileUtils {
     // Command Functions \\
 
     // ADD Command Method
-    private void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
+    public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
     {
         // Make and add item to our list
         Item newProduct = new Item(itemName, itemCost, itemQuantity, itemAisle);
@@ -264,7 +264,7 @@ public class FileUtils {
     }
 
     // FIRE Command Method
-    private void FIRE(String staffName)
+    public void FIRE(String staffName)
     {
         // Variable for fail condition
         Staff staffToRemove = new Staff("Null", 28, "g", "");
@@ -296,7 +296,7 @@ public class FileUtils {
     }
 
     // HIRE Command Method
-    private void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
+    public void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
     {
         // Make staff object, add to list
         Staff newStaffMember = new Staff(staffName, staffAge, staffRole, staffAvailability);
@@ -310,7 +310,7 @@ public class FileUtils {
     }
 
     // SAW Command Method (uses SawPrimePlanks)
-    private void SAW()
+    public void SAW()
     {
         // Make scheduler object
         SawPrimePlanks sawPrimePlanks = new SawPrimePlanks();
@@ -417,7 +417,7 @@ public class FileUtils {
         }
     }
 
-    private void QUANTITY(String itemName)
+    public void QUANTITY(String itemName)
     {
         double itemQuantity = 0.0;
         //Find the cost
