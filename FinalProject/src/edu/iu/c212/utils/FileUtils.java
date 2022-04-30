@@ -1,7 +1,7 @@
 package edu.iu.c212.utils;
 
-import edu.iu.c212.SawPrimePlanks;
-import edu.iu.c212.StaffScheduler;
+import edu.iu.c212.programs.SawPrimePlanks;
+import edu.iu.c212.programs.StaffScheduler;
 import edu.iu.c212.Store;
 import edu.iu.c212.models.*;
 import edu.iu.c212.programs.StoreMapDisplay;
@@ -153,9 +153,41 @@ public class FileUtils {
 
     }
 
-    public static List<String> readCommandsFromFile() throws IOException {
-        // TODO
-        return null;
+    public static List<String> readCommandsFromFile() throws IOException
+    {
+        Scanner in = new Scanner(inputFile);
+        while (in.hasNextLine()) ;
+        if (in.next().equals("ADD"))
+        {
+
+        }
+        else if (in.next().equals("COST"))
+        {
+        } else if (in.next().equals("EXIT"))
+        {
+
+        } else if (in.next().equals("FIND")) {
+
+        } else if (in.next().equals("FIRE")) {
+
+        } else if (in.next().equals("HIRE")) {
+
+        }
+        else if(in.next().equals("PROMOTE")){
+
+        }
+        else if(in.next().equals("SAW")){
+
+        }
+        else if(in.next().equals("SCHEDULE")){
+
+        }
+        else if(in.next().equals("SELL")){
+
+        }
+        else if(in.next().equals("QUANTITY")){
+
+        }
     }
 
     public static void writeStoreScheduleToFile(List<String> lines)

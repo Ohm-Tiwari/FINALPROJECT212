@@ -1,7 +1,6 @@
-package edu.iu.c212;
+package edu.iu.c212.programs;
 
 import edu.iu.c212.models.Staff;
-import edu.iu.c212.utils.FileUtils;
 
 import java.io.*;
 import java.util.*;
@@ -13,7 +12,7 @@ public class StaffScheduler
 {
 
     // Methods
-    public void ScheduleStaff() throws FileNotFoundException, IOException
+    public void ScheduleStaff() throws , IOException
     {
         List<Staff> schedules = getSchedules();
 
