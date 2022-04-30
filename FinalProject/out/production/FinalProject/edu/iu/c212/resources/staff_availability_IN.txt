@@ -1,10 +1,10 @@
-Jason Henderson 35 Manager T.TR.SAT.SUN
-Catherine Garcia 19 Cashier M.W.F.SAT
+Jason Henderson 35 M T.TR.SAT.SUN
+Catherine Garcia 19 C M.W.F.SAT
 Amanda Smith 24 G M.T.W.TR
-Earl Edwards 18 Cashier TR.F.SAT.SUN
-Kenneth White 40 Manager M.T.W.F.
+Earl Edwards 18 C TR.F.SAT.SUN
+Kenneth White 40 M M.T.W.F.
 Carolyn Perry 22 G F.SAT.SUN
-Lisa Russell 46 Cashier T.W.TR.F
-Anthony Mitchell 20 Cashier M.W.F.SUN
+Lisa Russell 46 C T.W.TR.F
+Anthony Mitchell 20 C M.W.F.SUN
 Jack Sanchez 26 G M.T.W
-Wanda Flores 67 Mamager W.TR.F.SUN
+Wanda Flores 67 M W.TR.F.SUN

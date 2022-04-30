@@ -42,26 +42,35 @@ public class FileUtils {
 
         // Moved store code
         Scanner in = new Scanner(inventoryFile);
-        in.useDelimiter(",|\\r");
+        in.useDelimiter(",|\\r|\\n");
         //in.nextLine();
         int index = 0;
+
 
         while(in.hasNext())
         {
             if (index == 0) {
+                System.out.println("Set name");
                 String tempName = in.next();
                 name = tempName.substring(1, tempName.length() - 1);
                 index++;
             } else if (index == 1) {
+                System.out.println("Set double");
                 price = Double.parseDouble(in.next());
                 index++;
             } else if (index == 2) {
+                System.out.println("Set int 1");
                 quantity = Integer.parseInt(in.next());
                 index++;
             } else if (index == 3) {
+                System.out.println("Set int 1");
                 aisleNum = Integer.parseInt(in.next());
                 returnList.add(new Item(name, price, quantity, aisleNum));
                 index = 0;
+                if(in.hasNext())
+                {
+                    in.nextLine();
+                }
             }
         }
 
@@ -114,7 +123,7 @@ public class FileUtils {
             List<String> itemStrings = new ArrayList<String>();
             for (Item item : items)
             {
-                String itemFormat = item.getName() + ("'," + item.getPrice()) + ("," + item.getQuantity()) + ("," + item.getAisle());
+                String itemFormat = "'" + item.getName() + ("'," + item.getPrice()) + ("," + item.getQuantity()) + ("," + item.getAisle());
                 itemStrings.add(itemFormat);
             }
 
@@ -164,6 +173,8 @@ public class FileUtils {
         System.out.println("Read commands");
         List<String> commandList = new ArrayList<>();
         Scanner in = new Scanner(inputFile);
+        in.useDelimiter("[,\\r\\n]");
+
         while (in.hasNextLine())
         {
             commandList.add(in.nextLine());
