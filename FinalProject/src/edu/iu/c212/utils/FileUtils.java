@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileUtils {
-    private static File inputFile = new File("../resources/input.txt");
-    private static File outputFile = new File("../resources/output.txt");
-    private static File inventoryFile = new File("../resources/inventory.txt");
-    private static File staffAvailabilityFile = new File("../resources/staff_availability_IN.txt");
-    private static File shiftSchedulesFile = new File("../resources/shift_schedules_IN.txt");
-    private static File storeScheduleFile = new File("../resources/store_schedule_OUT.txt");
+    private static final File inputFile = new File("src/edu/iu/c212/resources/input.txt");
+    private static final File outputFile = new File("src/edu/iu/c212/resources/output.txt");
+    private static final File inventoryFile = new File("src/edu/iu/c212/resources/inventory.txt");
+    private static final File staffAvailabilityFile = new File("src/edu/iu/c212/resources/staff_availability_IN.txt");
+    private static final File shiftSchedulesFile = new File("src/edu/iu/c212/resources/shift_schedules_IN.txt");
+    private static final File storeScheduleFile = new File("src/edu/iu/c212/resources/store_schedule_OUT.txt");
 
     // Private variables used for reading from File
     private static String name;
@@ -34,7 +34,8 @@ public class FileUtils {
     // Should be adapted properly
     public static List<Item> readInventoryFromFile() throws IOException
     {
-        System.out.println(inventoryFile.toURI().getPath() + "\n" + inventoryFile.exists());
+        //stem.out.println("Tri");
+        System.out.println(inventoryFile/*.toURI()*/.getPath() + "\n" + inventoryFile.exists());
         // depending on your OS, toURI() may need to be used when working with paths
 
         // List to return
@@ -42,11 +43,12 @@ public class FileUtils {
 
         // Moved store code
         Scanner in = new Scanner(inventoryFile);
-        in.nextLine();
+        //in.nextLine();
         in.useDelimiter(",|\\n");
         int index = 0;
 
-        while(in.hasNext()){
+        while(in.hasNext())
+        {
             if (index == 0) {
                 String tempName = in.next();
                 name = tempName.substring(1, tempName.length() - 1);
@@ -63,17 +65,20 @@ public class FileUtils {
                 index = 0;
             }
         }
+
         return returnList;
     }
 
     public static List<Staff> readStaffFromFile() throws IOException
     {
+        System.out.println(staffAvailabilityFile/*.toURI()*/.getPath() + "\n" + staffAvailabilityFile.exists());
+
         //Create return list
         List<Staff> returnList2 = new ArrayList<Staff>();
 
         Scanner in = new Scanner(staffAvailabilityFile);
-        in.nextLine();
-        in.useDelimiter(",|\\n");
+        //in.nextLine();
+        //in.useDelimiter(",|\\n");
         int index = 0;
 
         while(in.hasNext()){
@@ -91,7 +96,7 @@ public class FileUtils {
                 index++;
             } else if (index == 4) {
                 availability = in.next();
-                returnList2.add(new Staff((fName + " " + lName), age, role, availability));
+                returnList2.add(new Staff(fName, age, role, availability));
                 index = 0;
             }
         }
@@ -100,6 +105,7 @@ public class FileUtils {
 
     public void writeInventoryToFile(List<Item> items)
     {
+        System.out.println("Wrote");
         try
         {
             FileWriter inventoryInput = new FileWriter(inventoryFile, false);
@@ -130,6 +136,7 @@ public class FileUtils {
 
     public void writeStaffToFile(List<Staff> employees)
     {
+        System.out.println("Wrote staff");
         try
         {
             // Create writers
@@ -155,17 +162,23 @@ public class FileUtils {
 
     public static List<String> readCommandsFromFile() throws IOException
     {
+        System.out.println("Read commands");
         List<String> commandList = new ArrayList<>();
         Scanner in = new Scanner(inputFile);
         while (in.hasNextLine())
         {
             commandList.add(in.nextLine());
         }
+        for (String string :commandList)
+        {
+            System.out.println(string);
+        }
         return commandList;
     }
 
     public static void writeStoreScheduleToFile(List<String> lines) throws IOException
     {
+        System.out.println("Wrote store schedule");
         FileWriter scheduleWriter = new FileWriter(storeScheduleFile);
         PrintWriter output = new PrintWriter(scheduleWriter, true);
 
@@ -181,6 +194,7 @@ public class FileUtils {
     // Should be implemented properly
     public static void writeLineToOutputFile(String line)
     {
+        System.out.println("WriteLineTOOutputFile");
         try
         {
             FileWriter output = new FileWriter(outputFile, true);
@@ -200,6 +214,7 @@ public class FileUtils {
     // ADD Command Method
     public void ADD(String itemName, double itemCost, int itemQuantity, int itemAisle)
     {
+        System.out.println("add");
         // Make and add item to our list
         Item newProduct = new Item(itemName, itemCost, itemQuantity, itemAisle);
         Store.itemList.add(newProduct);
