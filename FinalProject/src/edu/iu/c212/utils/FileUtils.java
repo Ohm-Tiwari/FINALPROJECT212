@@ -155,39 +155,13 @@ public class FileUtils {
 
     public static List<String> readCommandsFromFile() throws IOException
     {
+        List<String> commandList = new ArrayList<>();
         Scanner in = new Scanner(inputFile);
-        while (in.hasNextLine()) ;
-        if (in.next().equals("ADD"))
+        while (in.hasNextLine())
         {
-
+            commandList.add(in.nextLine());
         }
-        else if (in.next().equals("COST"))
-        {
-        } else if (in.next().equals("EXIT"))
-        {
-
-        } else if (in.next().equals("FIND")) {
-
-        } else if (in.next().equals("FIRE")) {
-
-        } else if (in.next().equals("HIRE")) {
-
-        }
-        else if(in.next().equals("PROMOTE")){
-
-        }
-        else if(in.next().equals("SAW")){
-
-        }
-        else if(in.next().equals("SCHEDULE")){
-
-        }
-        else if(in.next().equals("SELL")){
-
-        }
-        else if(in.next().equals("QUANTITY")){
-
-        }
+        return commandList;
     }
 
     public static void writeStoreScheduleToFile(List<String> lines)
@@ -230,7 +204,7 @@ public class FileUtils {
 
 
     // COST Command Method
-    private void COST(String itemName)
+    public static void COST(String itemName)
     {
         double itemCost = 0.0;
         //Find the cost
@@ -255,7 +229,7 @@ public class FileUtils {
     }
 
     // FIND Command Method (uses StoreMap)
-    private void FIND(String itemName)
+    public static void FIND(String itemName)
     {
         // Find the item
         Item itemFound = new Item("Null", 0.0, 1, 1);
@@ -341,7 +315,7 @@ public class FileUtils {
             if(item.getName().substring(0, 5).equals("Plank"))
             {
                 //Derive length from string
-                String itemLength = item.getName().substring(6, item.getName().length() + 1);
+                String itemLength = item.getName().substring(5, item.getName().length());
                 Integer plankLength = Integer.parseInt(itemLength);
 
                 if(!sawPrimePlanks.isPrime(plankLength))

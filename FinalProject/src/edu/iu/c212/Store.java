@@ -36,10 +36,71 @@ public class Store implements IStore {
 
     // Methods
     @Override
-    public void takeAction() {
+    public void takeAction()
+    {
         // Create the lists
         saveItemsFromFile();
         saveStaffFromFile();
+
+        try
+        {
+            //Grab command lines
+            List<String> commandList = FileUtils.readCommandsFromFile();
+
+            for (String commandLine: commandList)
+            {
+                if (commandLine.substring(0,3).equals("ADD")) // ADD command
+                {
+                    String[] split = commandLine.split(" ");
+                }
+                else if (commandLine.substring(0,3).equals("COS")) // COST command
+                {
+
+                }
+                else if (commandLine.substring(0,3).equals("EXI")) // EXIT command
+                {
+
+                }
+                else if (commandLine.substring(0,3).equals("FIN")) // FIND command
+                {
+
+                }
+                else if (commandLine.substring(0,3).equals("FIR")) // FIRE command
+                {
+
+                }
+                else if (commandLine.substring(0,3).equals("HIR")) // HIRE command
+                {
+
+                }
+                else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
+                {
+
+                }
+                else if(commandLine.substring(0,3).equals("SAW")) // SAW command
+                {
+
+                }
+                else if(commandLine.substring(0,3).equals("SCH")) // SCHEDULE command
+                {
+
+                }
+                else if(commandLine.substring(0,3).equals("SEL")) // SELL command
+                {
+
+                }
+                else if(commandLine.substring(0,3).equals("QUA")) // QUANTITY command
+                {
+
+                }
+            }
+
+
+        }
+        catch (IOException e)
+        {
+            System.exit(0);
+        }
     }
 
 
