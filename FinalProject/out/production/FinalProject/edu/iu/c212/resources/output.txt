@@ -30,4 +30,10 @@ Planks sawed.
 Thank you for visiting High’s Hardware and Gardening!
 Schedule created.
 Planks sawed.
-Thank you for visiting High’s Hardware and Gardening!
+Thank you for visiting High’s Hardware and Gardening!CordlessScrewdri was added to inventory.
+Mult: $0.0
+ERROR: Thermostat cannot be found.
+ERROR: Han cannot be found.
+1 Hammer was sold.
+Pain: #0.0
+ERROR: Joshu cannot be found.

@@ -114,7 +114,7 @@ public class FileUtils {
             List<String> itemStrings = new ArrayList<String>();
             for (Item item : items)
             {
-                String itemFormat = item.getName() + ("," + item.getPrice()) + ("," + item.getQuantity()) + ("," + item.getAisle());
+                String itemFormat = item.getName() + ("'," + item.getPrice()) + ("," + item.getQuantity()) + ("," + item.getAisle());
                 itemStrings.add(itemFormat);
             }
 
