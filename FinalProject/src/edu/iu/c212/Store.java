@@ -52,18 +52,11 @@ public class Store implements IStore {
                 else if (commandLine.substring(0,3).equals("ADD")) // ADD command
                 {
                     String[] split = commandLine.split(" ");
-                    String name = split[1].substring(1, split[1].length());
+                    String name = commandLine;
+                    System.out.println(commandLine);
+                    name = split[4].substring(0, name.indexOf("'"));
                     //System.out.println("Length" + split.length);
-                    if(split.length == 7)
-                    {
-                        file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
-                    }
-                    else
-                    {
-                        String name1 = split[2].substring(0, split[1].length() - 1);
-                        String actualName = name + name1;
-                        file.ADD(actualName, Double.parseDouble(split[3]), Integer.parseInt(split[5]), Integer.parseInt(split[7]));
-                    }
+                    file.ADD(name, Double.parseDouble(split[3]), Integer.parseInt(split[5]), Integer.parseInt(split[7]));
                 }
                 else if (commandLine.substring(0,3).equals("COS")) // COST command
                 {

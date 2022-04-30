@@ -173,7 +173,6 @@ public class FileUtils {
         System.out.println("Read commands");
         List<String> commandList = new ArrayList<>();
         Scanner in = new Scanner(inputFile);
-        in.useDelimiter("[,\\r\\n]");
 
         while (in.hasNextLine())
         {

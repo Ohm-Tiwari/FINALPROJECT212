@@ -19,4 +19,3 @@
 'Wood',14.0,80,12
 'Water Nosel',18.0,24,11
 'Leaf Blower',91.0,18,8
-'CordlessScrewdri',30.0,1,2
