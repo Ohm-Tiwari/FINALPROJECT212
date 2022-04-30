@@ -34,6 +34,7 @@ public class FileUtils {
     // Should be adapted properly
     public static List<Item> readInventoryFromFile() throws IOException
     {
+        //stem.out.println("Tri");
         System.out.println(inventoryFile/*.toURI()*/.getPath() + "\n" + inventoryFile.exists());
         // depending on your OS, toURI() may need to be used when working with paths
 
@@ -42,8 +43,8 @@ public class FileUtils {
 
         // Moved store code
         Scanner in = new Scanner(inventoryFile);
+        in.useDelimiter(",|\\r");
         //in.nextLine();
-        in.useDelimiter(",|\\n");
         int index = 0;
 
         while(in.hasNext())
@@ -229,6 +230,7 @@ public class FileUtils {
     // COST Command Method
     public void COST(String itemName)
     {
+        System.out.println("Cost");
         double itemCost = 0.0;
         //Find the cost
         for (Item item: Store.itemList)
@@ -254,6 +256,7 @@ public class FileUtils {
     // FIND Command Method (uses StoreMap)
     public  void FIND(String itemName)
     {
+        System.out.println("Find");
         // Find the item
         Item itemFound = new Item("Null", 0.0, 1, 1);
 
@@ -280,6 +283,7 @@ public class FileUtils {
     // FIRE Command Method
     public void FIRE(String staffName)
     {
+        System.out.println("Fire");
         // Variable for fail condition
         Staff staffToRemove = new Staff("Null", 28, "g", "");
 
@@ -312,6 +316,7 @@ public class FileUtils {
     // HIRE Command Method
     public void HIRE(String staffName, int staffAge, String staffRole, String staffAvailability)
     {
+        System.out.println("Hire");
         // Make staff object, add to list
         Staff newStaffMember = new Staff(staffName, staffAge, staffRole, staffAvailability);
         Store.staffList.add(newStaffMember);
@@ -325,6 +330,7 @@ public class FileUtils {
 
     public void PROMOTE(String staffName, String staffRole)
     {
+        System.out.println("Promote");
         // Grab staff member
         Staff staffToPromote = new Staff("Null", 28, "g", "");
 
@@ -356,6 +362,7 @@ public class FileUtils {
     // SAW Command Method (uses SawPrimePlanks)
     public void SAW()
     {
+        System.out.println("Saw");
         // Make scheduler object
         SawPrimePlanks sawPrimePlanks = new SawPrimePlanks();
 
@@ -407,6 +414,7 @@ public class FileUtils {
     // SCHEDULE Command Method (uses StaffScheduler)
     public void SCHEDULE()
     {
+        System.out.println("Schedule");
         try
         {
             // Make scheduler object
@@ -426,6 +434,7 @@ public class FileUtils {
     // SELL Command Method
     public void SELL(String itemName, int itemQuantity)
     {
+        System.out.println("Sell");
         // Remove the given quantity from the inventory line to inventory
         Item itemFound = new Item("Null", 0.0, 1, 1);
 
@@ -463,6 +472,7 @@ public class FileUtils {
 
     public void QUANTITY(String itemName)
     {
+        System.out.println("Quantity");
         double itemQuantity = 0.0;
         //Find the cost
         for (Item item: Store.itemList)

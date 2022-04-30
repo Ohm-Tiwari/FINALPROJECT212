@@ -1,22 +1,22 @@
-// itemName,itemCost,itemQuantity,itemAisle
-'Hammer',30,2,3
-'Multi Bit Ratcheting',59,1,4
-'Paint cans',20,4,5
-'Pilers',15,5,1
-'Shovel',40,10,2
-'Fiskars',22,20,7
-'Hand trucks',29,8,3
-'Gas chain saw',39,3,4
-'Wheel Barrow',100,7,5
-'Shears',30,4,8
-'Cotton Hoe',43,2,8
-'Pottato Hook',54,5,3
-'Drill Forks',68,10,7
-'Potting Soils',9,12,4
-'Rakes',20,20,6
-'Pruners',43,2,10
-'Composters',70,4,11
-'Pots',21,5,11
-'Wood',14,80,12
-'Water Nosel',18,24,11
-'Leaf Blower',91,18,8
+Hammer30.023
+'Multi Bit Ratcheting59.014
+'Paint cans20.045
+'Pilers15.051
+'Shovel40.0102
+'Fiskars22.0207
+'Hand trucks29.083
+'Gas chain saw39.034
+'Wheel Barrow100.075
+'Shears30.048
+'Cotton Hoe43.028
+'Pottato Hook54.053
+'Drill Forks68.0107
+'Potting Soils9.0124
+'Rakes20.0206
+'Pruners43.0210
+'Composters70.0411
+'Pots21.0511
+'Wood14.08012
+'Water Nosel18.02411
+'Leaf Blower91.0188
+CordlessScrewdri30.012
