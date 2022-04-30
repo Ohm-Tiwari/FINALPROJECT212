@@ -81,7 +81,9 @@ public class Store implements IStore {
                 }
                 else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.PROMOTE(name, split[2]);
                 }
                 else if(commandLine.substring(0,3).equals("SAW")) // SAW command
                 {
