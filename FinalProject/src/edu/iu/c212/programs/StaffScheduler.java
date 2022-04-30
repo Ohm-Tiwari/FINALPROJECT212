@@ -12,7 +12,7 @@ public class StaffScheduler
 {
 
     // Methods
-    public void ScheduleStaff() throws , IOException
+    public void ScheduleStaff()
     {
         List<Staff> schedules = getSchedules();
 
