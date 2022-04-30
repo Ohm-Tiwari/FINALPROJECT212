@@ -213,7 +213,7 @@ public class FileUtils {
 
 
     // COST Command Method
-    public static void COST(String itemName)
+    public void COST(String itemName)
     {
         double itemCost = 0.0;
         //Find the cost
@@ -238,7 +238,7 @@ public class FileUtils {
     }
 
     // FIND Command Method (uses StoreMap)
-    public static void FIND(String itemName)
+    public  void FIND(String itemName)
     {
         // Find the item
         Item itemFound = new Item("Null", 0.0, 1, 1);

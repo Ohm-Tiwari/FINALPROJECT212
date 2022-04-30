@@ -41,7 +41,7 @@ public class Store implements IStore {
         // Create the lists
         saveItemsFromFile();
         saveStaffFromFile();
-
+        FileUtils file = new FileUtils();
         try
         {
             //Grab command lines
@@ -52,30 +52,40 @@ public class Store implements IStore {
                 if (commandLine.substring(0,3).equals("ADD")) // ADD command
                 {
                     String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
                 }
                 else if (commandLine.substring(0,3).equals("COS")) // COST command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.COST(name);
                 }
                 else if (commandLine.substring(0,3).equals("EXI")) // EXIT command
                 {
-
+                    file.EXIT();
                 }
                 else if (commandLine.substring(0,3).equals("FIN")) // FIND command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.FIND(name);
                 }
                 else if (commandLine.substring(0,3).equals("FIR")) // FIRE command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.FIRE(name);
                 }
                 else if (commandLine.substring(0,3).equals("HIR")) // HIRE command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.HIRE(name, Integer.parseInt(split[2]), split[3], split[4]);
                 }
                 else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
                 {
-
+                    
                 }
                 else if(commandLine.substring(0,3).equals("SAW")) // SAW command
                 {
