@@ -2,15 +2,11 @@ package edu.iu.c212;
 
 import edu.iu.c212.models.Item;
 import edu.iu.c212.models.Staff;
-import edu.iu.c212.programs.StoreMap;
-import edu.iu.c212.programs.StoreMapDisplay;
 import edu.iu.c212.utils.FileUtils;
 
 import java.awt.event.KeyEvent;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.awt.event.KeyListener;
 
 import static edu.iu.c212.Store.exitCommandMenu;
@@ -85,23 +81,27 @@ public class Store implements IStore {
                 }
                 else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
                 {
-                    
+
                 }
                 else if(commandLine.substring(0,3).equals("SAW")) // SAW command
                 {
-
+                    file.SAW();
                 }
                 else if(commandLine.substring(0,3).equals("SCH")) // SCHEDULE command
                 {
-
+                    file.SCHEDULE();
                 }
                 else if(commandLine.substring(0,3).equals("SEL")) // SELL command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.SELL(name, Integer.parseInt(split[2]));
                 }
                 else if(commandLine.substring(0,3).equals("QUA")) // QUANTITY command
                 {
-
+                    String[] split = commandLine.split(" ");
+                    String name = split[1].substring(1, split[1].length() - 1);
+                    file.QUANTITY(name);
                 }
             }
 
