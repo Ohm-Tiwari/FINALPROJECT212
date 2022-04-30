@@ -53,7 +53,7 @@ public class Store implements IStore {
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length());
-                    System.out.println("Length" + split.length);
+                    //System.out.println("Length" + split.length);
                     if(split.length == 7)
                     {
                         file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
@@ -64,7 +64,6 @@ public class Store implements IStore {
                         String actualName = name + name1;
                         file.ADD(actualName, Double.parseDouble(split[3]), Integer.parseInt(split[5]), Integer.parseInt(split[7]));
                     }
-
                 }
                 else if (commandLine.substring(0,3).equals("COS")) // COST command
                 {
@@ -92,6 +91,15 @@ public class Store implements IStore {
                 {
                     String[] split = commandLine.split(" ");
                     String name = split[1].substring(1, split[1].length() - 1);
+                    System.out.println(split.length);
+                    if(split.length == 7)
+                    {
+                        file.ADD(name, Double.parseDouble(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
+                    }
+                    else {
+                        String name1 = split[2].substring(0, split[1].length() - 1);
+                        String actualName = name + name1;
+                    }
                     file.HIRE(name, Integer.parseInt(split[2]), split[3], split[4]);
                 }
                 else if(commandLine.substring(0,3).equals("PRO")) // PROMOTE command
