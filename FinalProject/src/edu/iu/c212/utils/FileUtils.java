@@ -34,7 +34,6 @@ public class FileUtils {
     // Should be adapted properly
     public static List<Item> readInventoryFromFile() throws IOException
     {
-        //stem.out.println("Tri");
         System.out.println(inventoryFile/*.toURI()*/.getPath() + "\n" + inventoryFile.exists());
         // depending on your OS, toURI() may need to be used when working with paths
 
