@@ -15,7 +15,6 @@ public class FileUtils {
     private static File inputFile = new File("../resources/input.txt");
     private static File outputFile = new File("../resources/output.txt");
     private static File inventoryFile = new File("../resources/inventory.txt");
-    private static File staffFile = new File("../resources/staff.txt");
     private static File staffAvailabilityFile = new File("../resources/staff_availability_IN.txt");
     private static File shiftSchedulesFile = new File("../resources/shift_schedules_IN.txt");
     private static File storeScheduleFile = new File("../resources/store_schedule_OUT.txt");
@@ -72,7 +71,7 @@ public class FileUtils {
         //Create return list
         List<Staff> returnList2 = new ArrayList<Staff>();
 
-        Scanner in = new Scanner(staffFile);
+        Scanner in = new Scanner(staffAvailabilityFile);
         in.nextLine();
         in.useDelimiter(",|\\n");
         int index = 0;
@@ -134,7 +133,7 @@ public class FileUtils {
         try
         {
             // Create writers
-            FileWriter staffFileInput = new FileWriter(staffFile, false);
+            FileWriter staffFileInput = new FileWriter(staffAvailabilityFile, false);
             PrintWriter writeToStaffFile = new PrintWriter(staffFileInput, true);
 
             // Write list
@@ -286,7 +285,7 @@ public class FileUtils {
         else
         {
             //Remove staff from list
-            Store.staffList.remove(staffFile);
+            Store.staffList.remove(staffAvailabilityFile);
 
             //Write updated list to staffFile
             writeStaffToFile(Store.staffList);
